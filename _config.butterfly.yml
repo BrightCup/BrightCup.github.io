@@ -57,14 +57,14 @@ social:
 favicon: /img/favicon.png
 
 avatar:
-  img: /img/butterfly-icon.png
+  img: /img/nanami.png
   effect: false
 
 # Disable all banner images
 disable_top_img: false
 
 # If the banner of page not setting, it will show the default_top_img
-default_top_img: https://w.wallhaven.cc/full/d8/wallhaven-d8vkq3.jpg
+default_top_img: /img/辛美尔和芙莉莲.jpg
 
 # The banner image of index page
 index_img:
