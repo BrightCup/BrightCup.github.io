@@ -18,8 +18,8 @@ nav:
   fixed: false
 
 menu:
-  Home: / || fas fa-home
-  Bangumis: /bangumis/ || fas fa-vedio
+  首页: / || fas fa-home
+  追番列表: /bangumis/ || fas fa-vedio
   # List||fas fa-list:
   #   Music: /music/ || fas fa-music
   #   Movie: /movies/ || fas fa-video
@@ -64,7 +64,7 @@ avatar:
 disable_top_img: false
 
 # If the banner of page not setting, it will show the default_top_img
-default_top_img:
+default_top_img: https://w.wallhaven.cc/full/d8/wallhaven-d8vkq3.jpg
 
 # The banner image of index page
 index_img:
@@ -146,7 +146,7 @@ post_meta:
 # The position of site info, eg: 300px/300em/300rem/10%
 index_site_info_top:
 # The height of top_img, eg: 300px/300em/300rem
-index_top_img_height:
+index_top_img_height: 400px
 
 # The subtitle on homepage
 subtitle:
