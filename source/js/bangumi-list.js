@@ -200,10 +200,17 @@
   /* ---------------- 封面加载失败兜底 ---------------- */
 
   root.querySelectorAll('.bgm-cd img').forEach(function (img) {
-    img.addEventListener('error', function () {
+    function fallback() {
       var card = img.closest('.bgm-cd');
       if (card) card.classList.add('is-noimg');
       img.remove();
-    });
+    }
+    // 脚本带 defer，可能晚于图片加载失败：此时 error 事件不会再触发，
+    // 需要主动检查一次（naturalWidth 为 0 说明没拿到图）
+    if (img.complete && img.naturalWidth === 0) {
+      fallback();
+      return;
+    }
+    img.addEventListener('error', fallback);
   });
 }());
