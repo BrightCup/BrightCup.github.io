@@ -1,0 +1,382 @@
+/*! 追番列表页 (bangumi-list) —— 与 /schedule/ 共用同一套设计变量 */
+
+.bgm-page {
+  --b-bg: #ffffff;
+  --b-soft: #f6f7fb;
+  --b-border: #eaeaf0;
+  --b-text: #2b2b33;
+  --b-text2: #6b6b78;
+  --b-text3: #9c9caa;
+  --b-accent: #425aef;
+  --b-accent-soft: #eef1fe;
+  --b-shadow: 0 2px 14px rgba(28, 32, 60, .06);
+  --b-shadow-hover: 0 8px 24px rgba(28, 32, 60, .14);
+  --b-shadow-sm: 0 1px 5px rgba(28, 32, 60, .12);
+  --b-on-accent: #ffffff;
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--b-text);
+}
+
+html[data-theme="dark"] .bgm-page {
+  --b-bg: #1c1c22;
+  --b-soft: #26262e;
+  --b-border: #33333d;
+  --b-text: #e7e7ec;
+  --b-text2: #a6a6b2;
+  --b-text3: #7a7a86;
+  --b-accent: #7d90ff;
+  --b-accent-soft: #272c46;
+  --b-shadow: 0 2px 14px rgba(0, 0, 0, .38);
+  --b-shadow-hover: 0 8px 24px rgba(0, 0, 0, .55);
+  --b-shadow-sm: 0 1px 5px rgba(0, 0, 0, .45);
+  /* 深色下 accent 变亮，白字对比度不足，改用深色字 */
+  --b-on-accent: #14141a;
+}
+
+/* ---------- 顶部格言 ---------- */
+.bgm-page .bgm-page__quote {
+  margin: 0 0 16px;
+  padding: 12px 16px;
+  border-left: 4px solid var(--b-accent);
+  border-radius: 0 10px 10px 0;
+  background: var(--b-accent-soft);
+  color: var(--b-text2);
+  font-size: 14px;
+}
+
+/* ---------- 工具条：分类 tab + 布局切换 ---------- */
+.bgm-page .bgm-page__bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 18px;
+}
+
+.bgm-page .bgm-tabs,
+.bgm-page .bgm-view {
+  display: flex;
+  gap: 4px;
+  padding: 4px;
+  border: 1px solid var(--b-border);
+  border-radius: 11px;
+  background: var(--b-soft);
+}
+
+.bgm-page .bgm-tab {
+  appearance: none;
+  border: 0;
+  margin: 0;
+  padding: 6px 14px;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--b-text2);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.4;
+  cursor: pointer;
+  transition: background .18s, color .18s, box-shadow .18s;
+}
+.bgm-page .bgm-tab:hover {
+  color: var(--b-accent);
+}
+.bgm-page .bgm-tab em {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  margin-left: 4px;
+  color: var(--b-text3);
+}
+.bgm-page .bgm-tab.is-active {
+  background: var(--b-bg);
+  color: var(--b-accent);
+  box-shadow: var(--b-shadow-sm);
+}
+.bgm-page .bgm-tab.is-active em {
+  color: var(--b-accent);
+}
+
+.bgm-page .bgm-view__btn {
+  appearance: none;
+  border: 0;
+  margin: 0;
+  padding: 0;
+  width: 30px;
+  height: 26px;
+  display: grid;
+  place-items: center;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--b-text3);
+  cursor: pointer;
+  transition: background .18s, color .18s, box-shadow .18s;
+}
+.bgm-page .bgm-view__btn:hover {
+  color: var(--b-accent);
+}
+.bgm-page .bgm-view__btn.is-active {
+  background: var(--b-bg);
+  color: var(--b-accent);
+  box-shadow: var(--b-shadow-sm);
+}
+.bgm-page .bgm-view__btn svg {
+  display: block;
+}
+
+/* ---------- 面板 ---------- */
+.bgm-page .bgm-panel {
+  display: none;
+}
+.bgm-page .bgm-panel.is-active {
+  display: block;
+}
+
+/* ---------- 卡片集合 ---------- */
+.bgm-page .bgm-collection[data-layout="grid"] {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(142px, 1fr));
+  gap: 14px;
+}
+.bgm-page .bgm-collection[data-layout="list"] {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* ---------- 单张卡片 ---------- */
+.bgm-page .bgm-cd {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid var(--b-border);
+  border-radius: 12px;
+  background: var(--b-bg);
+  box-shadow: var(--b-shadow);
+  color: var(--b-text);
+  text-decoration: none !important;
+  transition: transform .2s, box-shadow .2s, border-color .2s;
+}
+.bgm-page .bgm-cd:hover {
+  transform: translateY(-3px);
+  border-color: var(--b-accent);
+  box-shadow: var(--b-shadow-hover);
+}
+.bgm-page .bgm-cd:focus-visible {
+  outline: 2px solid var(--b-accent);
+  outline-offset: 2px;
+}
+/* JS 分页用 hidden 属性控制显隐，需覆盖上面的 display */
+.bgm-page .bgm-cd[hidden] {
+  display: none !important;
+}
+
+.bgm-page .bgm-cd__cover {
+  position: relative;
+  display: block;
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  background: linear-gradient(135deg, var(--b-soft), var(--b-border));
+}
+.bgm-page .bgm-cd__cover img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform .35s;
+}
+.bgm-page .bgm-cd:hover .bgm-cd__cover img {
+  transform: scale(1.05);
+}
+/* 无封面时用首字占位，避免整块空掉 */
+.bgm-page .bgm-cd.is-noimg .bgm-cd__cover::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 50% 42%, var(--b-border) 0 18%, transparent 19%),
+    linear-gradient(135deg, var(--b-soft), var(--b-border));
+}
+
+.bgm-page .bgm-cd__score {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  z-index: 1;
+  padding: 2px 8px;
+  border-radius: 20px;
+  background: var(--b-accent);
+  color: var(--b-on-accent);
+  font-style: normal;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.6;
+  letter-spacing: .2px;
+}
+
+.bgm-page .bgm-cd__body {
+  display: block;
+  padding: 9px 11px 11px;
+}
+
+.bgm-page .bgm-cd__title {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  min-height: 2.8em;
+  font-size: 13.5px;
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--b-text);
+  transition: color .18s;
+}
+.bgm-page .bgm-cd:hover .bgm-cd__title {
+  color: var(--b-accent);
+}
+
+.bgm-page .bgm-cd__meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  margin-top: 7px;
+  font-size: 11.5px;
+  color: var(--b-text3);
+}
+.bgm-page .bgm-cd__type {
+  position: relative;
+  padding-right: 7px;
+}
+.bgm-page .bgm-cd__type::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: 50%;
+  width: 1px;
+  height: 10px;
+  margin-top: -5px;
+  background: var(--b-border);
+}
+
+/* ---------- 列表布局：封面左、文字右 ---------- */
+.bgm-page .bgm-collection[data-layout="list"] .bgm-cd {
+  flex-direction: row;
+  align-items: stretch;
+}
+.bgm-page .bgm-collection[data-layout="list"] .bgm-cd:hover {
+  transform: translateX(3px);
+}
+.bgm-page .bgm-collection[data-layout="list"] .bgm-cd__cover {
+  position: static;
+  flex: 0 0 62px;
+  width: 62px;
+  height: 82px;
+  aspect-ratio: auto;
+  border-radius: 0;
+}
+.bgm-page .bgm-collection[data-layout="list"] .bgm-cd__score {
+  top: 50%;
+  right: 14px;
+  transform: translateY(-50%);
+}
+.bgm-page .bgm-collection[data-layout="list"] .bgm-cd__body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex: 1 1 auto;
+  min-width: 0;
+  padding: 10px 74px 10px 14px;
+}
+.bgm-page .bgm-collection[data-layout="list"] .bgm-cd__title {
+  display: block;
+  overflow: hidden;
+  min-height: 0;
+  font-size: 15px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.bgm-page .bgm-collection[data-layout="list"] .bgm-cd__meta {
+  margin-top: 5px;
+}
+
+/* ---------- 空状态 ---------- */
+.bgm-page .bgm-empty {
+  grid-column: 1 / -1;
+  padding: 44px 0;
+  text-align: center;
+  color: var(--b-text3);
+  font-size: 13px;
+}
+
+/* ---------- 分页 ---------- */
+.bgm-page .bgm-pager {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  margin: 24px 0 6px;
+}
+.bgm-page .bgm-pager__btn {
+  appearance: none;
+  padding: 5px 13px;
+  border: 1px solid var(--b-border);
+  border-radius: 8px;
+  background: var(--b-bg);
+  color: var(--b-text2);
+  font-size: 13px;
+  line-height: 1.5;
+  cursor: pointer;
+  transition: border-color .18s, color .18s;
+}
+.bgm-page .bgm-pager__btn:hover:not(:disabled) {
+  border-color: var(--b-accent);
+  color: var(--b-accent);
+}
+.bgm-page .bgm-pager__btn:disabled {
+  opacity: .4;
+  cursor: not-allowed;
+}
+.bgm-page .bgm-pager__num {
+  padding: 0 8px;
+  font-size: 12.5px;
+  color: var(--b-text3);
+}
+.bgm-page .bgm-pager__num b {
+  color: var(--b-text);
+  font-size: 14px;
+}
+
+/* ---------- 页脚 ---------- */
+.bgm-page .bgm-page__foot {
+  margin-top: 14px;
+  text-align: center;
+  font-size: 12px;
+  color: var(--b-text3);
+}
+
+/* ---------- 响应式 ---------- */
+@media (max-width: 640px) {
+  .bgm-page .bgm-collection[data-layout="grid"] {
+    grid-template-columns: repeat(auto-fill, minmax(108px, 1fr));
+    gap: 10px;
+  }
+  .bgm-page .bgm-cd__body {
+    padding: 8px 9px 10px;
+  }
+  .bgm-page .bgm-cd__title {
+    font-size: 12.5px;
+  }
+  .bgm-page .bgm-tab {
+    padding: 6px 10px;
+    font-size: 13px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bgm-page .bgm-cd,
+  .bgm-page .bgm-cd__cover img {
+    transition: none;
+  }
+}
