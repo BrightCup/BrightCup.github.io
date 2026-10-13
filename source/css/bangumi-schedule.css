@@ -1,0 +1,273 @@
+/*! 追番更新页 (bangumi-schedule) —— 与 Butterfly 主题浅色/深色模式自适应 */
+
+.bgm-sched {
+  --b-bg: #ffffff;
+  --b-soft: #f6f7fb;
+  --b-border: #eaeaf0;
+  --b-text: #2b2b33;
+  --b-text2: #6b6b78;
+  --b-text3: #9c9caa;
+  --b-accent: #425aef;
+  --b-accent-soft: #eef1fe;
+  --b-today: #f09199;
+  --b-today-soft: #fdf1f2;
+  --b-shadow: 0 2px 14px rgba(28, 32, 60, .06);
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--b-text);
+}
+
+html[data-theme="dark"] .bgm-sched {
+  --b-bg: #1c1c22;
+  --b-soft: #26262e;
+  --b-border: #33333d;
+  --b-text: #e7e7ec;
+  --b-text2: #a6a6b2;
+  --b-text3: #7a7a86;
+  --b-accent: #7d90ff;
+  --b-accent-soft: #272c46;
+  --b-today: #f09199;
+  --b-today-soft: #3a2629;
+  --b-shadow: 0 2px 14px rgba(0, 0, 0, .38);
+}
+
+/* ---------- 通用卡片 ---------- */
+.bgm-sched .bgm-card {
+  background: var(--b-bg);
+  border: 1px solid var(--b-border);
+  border-radius: 14px;
+  padding: 16px 18px 18px;
+  margin-bottom: 18px;
+  box-shadow: var(--b-shadow);
+}
+.bgm-sched .bgm-card__hd {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 14px;
+  padding-bottom: 10px;
+  border-bottom: 1px dashed var(--b-border);
+}
+.bgm-sched .bgm-card__hd h3 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--b-text);
+  border: 0;
+  padding: 0;
+}
+.bgm-sched .bgm-card__hd h3::before {
+  content: "";
+  display: inline-block;
+  width: 4px;
+  height: 15px;
+  border-radius: 2px;
+  margin-right: 8px;
+  vertical-align: -2px;
+  background: var(--b-accent);
+}
+.bgm-sched .bgm-card__hint {
+  font-size: 12px;
+  color: var(--b-text3);
+}
+
+/* ---------- 加载 / 错误 / 空 ---------- */
+.bgm-sched .bgm-sched__loading,
+.bgm-sched .bgm-sched__err {
+  padding: 40px 16px;
+  text-align: center;
+  color: var(--b-text3);
+  font-size: 14px;
+}
+.bgm-sched .bgm-sched__err {
+  color: #e05b5b;
+}
+.bgm-sched .bgm-empty {
+  padding: 18px 4px;
+  text-align: center;
+  color: var(--b-text3);
+  font-size: 13px;
+}
+
+/* ---------- 列表项（封面 + 文字） ---------- */
+.bgm-sched .bgm-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 9px 10px;
+  border-radius: 10px;
+  text-decoration: none !important;
+  color: var(--b-text);
+  border: 1px solid transparent;
+  transition: background .18s, border-color .18s, transform .18s;
+}
+.bgm-sched .bgm-item:hover {
+  background: var(--b-soft);
+  border-color: var(--b-border);
+  transform: translateX(2px);
+}
+.bgm-sched .bgm-item__cover {
+  flex: 0 0 auto;
+  width: 44px;
+  height: 60px;
+  border-radius: 7px;
+  background-color: var(--b-soft);
+  background-size: cover;
+  background-position: center;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, .14);
+}
+.bgm-sched .bgm-item__cover.is-empty {
+  background-image: linear-gradient(135deg, var(--b-soft), var(--b-border));
+}
+.bgm-sched .bgm-item__body {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: block;
+}
+.bgm-sched .bgm-item__title {
+  display: block;
+  font-size: 14.5px;
+  font-weight: 600;
+  color: var(--b-text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-bottom: 2px;
+}
+.bgm-sched .bgm-item__meta {
+  display: block;
+  font-size: 12.5px;
+  color: var(--b-text2);
+}
+.bgm-sched .bgm-item__meta b {
+  color: var(--b-accent);
+  font-weight: 700;
+}
+.bgm-sched .bgm-when {
+  color: var(--b-today);
+  font-style: normal;
+  font-weight: 600;
+  margin-left: 2px;
+}
+
+/* 今日更新高亮 */
+.bgm-sched .bgm-item--today {
+  background: var(--b-today-soft);
+  border-color: rgba(240, 145, 153, .4);
+}
+.bgm-sched .bgm-item--today .bgm-item__cover {
+  box-shadow: 0 1px 5px rgba(240, 145, 153, .5);
+}
+
+/* 进度条 */
+.bgm-sched .bgm-bar {
+  display: block;
+  height: 5px;
+  max-width: 260px;
+  margin-top: 7px;
+  border-radius: 3px;
+  background: var(--b-border);
+  overflow: hidden;
+}
+.bgm-sched .bgm-bar i {
+  display: block;
+  height: 100%;
+  border-radius: 3px;
+  background: linear-gradient(90deg, var(--b-accent), #7d90ff);
+}
+
+/* ---------- 本周日历 ---------- */
+.bgm-sched .bgm-week {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 8px;
+}
+.bgm-sched .bgm-week__day {
+  background: var(--b-soft);
+  border: 1px solid var(--b-border);
+  border-radius: 10px;
+  padding: 8px 8px 10px;
+  min-height: 92px;
+}
+.bgm-sched .bgm-week__day.is-today {
+  background: var(--b-today-soft);
+  border-color: rgba(240, 145, 153, .55);
+}
+.bgm-sched .bgm-week__hd {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 4px;
+  margin-bottom: 7px;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--b-text2);
+}
+.bgm-sched .bgm-week__hd em {
+  font-style: normal;
+  font-weight: 400;
+  color: var(--b-text3);
+  font-size: 11px;
+}
+.bgm-sched .bgm-week__day.is-today .bgm-week__hd {
+  color: var(--b-today);
+}
+.bgm-sched .bgm-week__items {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.bgm-sched .bgm-chip {
+  display: block;
+  padding: 4px 6px;
+  border-radius: 6px;
+  background: var(--b-bg);
+  border: 1px solid var(--b-border);
+  font-size: 11.5px;
+  line-height: 1.35;
+  color: var(--b-text);
+  text-decoration: none !important;
+  overflow: hidden;
+  transition: border-color .18s, color .18s;
+}
+.bgm-sched .bgm-chip:hover {
+  border-color: var(--b-accent);
+  color: var(--b-accent);
+}
+.bgm-sched .bgm-chip i {
+  display: block;
+  font-style: normal;
+  font-size: 10.5px;
+  color: var(--b-accent);
+}
+.bgm-sched .bgm-chip.is-new {
+  border-color: var(--b-today);
+}
+.bgm-sched .bgm-chip.is-new i {
+  color: var(--b-today);
+}
+.bgm-sched .bgm-week__none {
+  color: var(--b-text3);
+  font-size: 12px;
+}
+
+/* ---------- 页脚统计 ---------- */
+.bgm-sched .bgm-sched__foot {
+  text-align: center;
+  font-size: 12px;
+  color: var(--b-text3);
+  padding: 4px 0 8px;
+}
+
+/* ---------- 响应式 ---------- */
+@media (max-width: 860px) {
+  .bgm-sched .bgm-week {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (max-width: 480px) {
+  .bgm-sched .bgm-card { padding: 14px 12px 16px; }
+  .bgm-sched .bgm-week { grid-template-columns: 1fr; }
+  .bgm-sched .bgm-week__day { min-height: 0; }
+}

@@ -19,7 +19,8 @@ nav:
 
 menu:
   首页: / || fas fa-home
-  追番列表: /bangumis/ || fas fa-vedio
+  追番列表: /bangumis/ || fas fa-video
+  追番更新: /schedule/ || fas fa-calendar-day
   # List||fas fa-list:
   #   Music: /music/ || fas fa-music
   #   Movie: /movies/ || fas fa-video
