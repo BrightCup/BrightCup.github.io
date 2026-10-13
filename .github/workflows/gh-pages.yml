@@ -5,20 +5,26 @@ on:
   pull_request:
     branches: [ main ]
   workflow_dispatch:
+  schedule:
+    # 每天 UTC 22:00 = 北京时间 06:00 自动刷新追番数据后重建
+    - cron: '0 22 * * *'
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      CI: false
     steps:
       - name: Checkout 🛎️
         uses: actions/checkout@v3
         with:
           persist-credentials: false
-      - name: Install and Build 🔧
-        run: |
-          npm install
-          npm run build
-        env:
-          CI: false
+      - name: Install 🔧
+        run: npm install
+      - name: Update bangumi data 📺
+        # 拉取最新的追番收藏数据。失败时不让整个构建挂掉，退回用仓库里已有的数据继续构建。
+        run: npx hexo bangumis -u || echo "::warning::追番数据更新失败，改用仓库中已有数据继续构建"
+      - name: Build 🔨
+        run: npm run build
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@releases/v3
         with:
