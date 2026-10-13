@@ -13,6 +13,7 @@
     'https://bgmapi.anibt.net',
     'https://api.bgm.tv'
   ];
+  var SITE_BASE = 'https://bangumi.vip';   // 番剧详情跳转域名（官网 bgm.tv 国内不可达，用镜像）
   var TZ = 'Asia/Shanghai';
   var WEEK_CN = ['周一', '周二', '周三', '周四', '周五', '周六', '周日'];
 
@@ -64,7 +65,7 @@
       id: s.id,
       name: s.name_cn || s.name || ('#' + s.id),
       cover: img.grid || img.small || img.common || img.medium || img.large || '',
-      url: 'https://bgm.tv/subject/' + s.id,
+      url: SITE_BASE + '/subject/' + s.id,
       start: date,
       eps: eps,
       weekday: weekdayOf(date)
