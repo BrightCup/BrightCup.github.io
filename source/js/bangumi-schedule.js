@@ -17,6 +17,23 @@
   var TZ = 'Asia/Shanghai';
   var WEEK_CN = ['周一', '周二', '周三', '周四', '周五', '周六', '周日'];
 
+  /* 构建期注入的「站内已有详情页」id 白名单（scripts/bangumi-schedule-ids.js）。
+     本页数据是打开时才拉的，可能比你上次构建多出几部；那几部还没有站内详情页，
+     这时退回 Bangumi 镜像，避免点进去 404。拿不到白名单时按全都有处理。 */
+  var KNOWN = null;
+  (function () {
+    var list = window.BGM_KNOWN_IDS;
+    if (!list || !list.length) return;
+    KNOWN = {};
+    for (var i = 0; i < list.length; i += 1) KNOWN[list[i]] = 1;
+  })();
+
+  /** 站内详情页 / Bangumi 镜像，二选一 */
+  function resolveLink(id) {
+    if (!KNOWN || KNOWN[id]) return { url: '/bangumis/' + id + '/', ext: false };
+    return { url: SITE_BASE + '/subject/' + id, ext: true };
+  }
+
   /* ===================== 日期工具（东八区） ===================== */
   function ymdList(s) { return s.split('-').map(Number); }
   function toUTC(s) { var a = ymdList(s); return Date.UTC(a[0], a[1] - 1, a[2]); }
@@ -61,11 +78,13 @@
     if (!date || !eps) return null;
 
     var img = s.images || {};
+    var link = resolveLink(s.id);
     var item = {
       id: s.id,
       name: s.name_cn || s.name || ('#' + s.id),
       cover: img.grid || img.small || img.common || img.medium || img.large || '',
-      url: SITE_BASE + '/subject/' + s.id,
+      url: link.url,
+      ext: link.ext,
       start: date,
       eps: eps,
       weekday: weekdayOf(date)
@@ -106,10 +125,15 @@
     return url ? ' style="background-image:url(' + esc(url) + ')"' : '';
   }
 
+  /* 站外链接才新开窗口；站内详情页保持当前页跳转 */
+  function extAttrs(it) {
+    return it.ext ? ' target="_blank" rel="noopener"' : '';
+  }
+
   /* 列表项：封面 + 标题 + 一行说明 */
   function itemHTML(it, meta, extraClass) {
-    return '<a class="bgm-item ' + (extraClass || '') + '" href="' + esc(it.url) +
-      '" target="_blank" rel="noopener">' +
+    return '<a class="bgm-item ' + (extraClass || '') + '" href="' + esc(it.url) + '"' +
+      extAttrs(it) + '>' +
       '<span class="bgm-item__cover' + (it.cover ? '' : ' is-empty') + '"' + coverStyle(it.cover) + '></span>' +
       '<span class="bgm-item__body">' +
       '<span class="bgm-item__title">' + esc(it.name) + '</span>' +
@@ -158,13 +182,13 @@
           // 该天播出的是第几话（按开播日推算），而非「今天已播到第几话」
           var ep = Math.floor(diffDays(dayDate, it.start) / 7) + 1;
           if (ep < 1 || ep > it.eps) return;
-          dayItems.push('<a class="bgm-chip" href="' + esc(it.url) + '" target="_blank" rel="noopener">' +
+          dayItems.push('<a class="bgm-chip" href="' + esc(it.url) + '"' + extAttrs(it) + '>' +
             esc(it.name) + '<i>第' + ep + '话</i></a>');
         }
       });
       upcoming.forEach(function (it) {
         if (it.weekday === wd && diffDays(it.start, monday) >= 0 && diffDays(it.start, monday) < 7) {
-          dayItems.push('<a class="bgm-chip is-new" href="' + esc(it.url) + '" target="_blank" rel="noopener">' +
+          dayItems.push('<a class="bgm-chip is-new" href="' + esc(it.url) + '"' + extAttrs(it) + '>' +
             esc(it.name) + '<i>首播</i></a>');
         }
       });
