@@ -311,7 +311,7 @@ hexo.extend.generator.register('bangumis', function (locals) {
     '</div>',
     panels,
     '<div class="bgm-page__foot">共 ' + total + ' 部 · 想看 ' + counts[0] +
-    ' / 在看 ' + counts[1] + ' / 已看 ' + counts[2] + ' · 点开任意一部可改状态与进度</div>',
+    ' / 在看 ' + counts[1] + ' / 已看 ' + counts[2] + ' · 数据每天从 Bangumi 同步</div>',
     '</div>',
     '<script src="/js/bangumi-list.js" defer></script>'
   ].filter(Boolean).join('\n');

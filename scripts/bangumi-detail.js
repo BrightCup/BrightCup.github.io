@@ -4,10 +4,9 @@
 /**
  * 为每部收藏的番剧生成一个详情页 /bangumis/<id>/。
  *
- * 页面分两块：
- * - 静态部分（构建期输出，无 JS 也能读）：封面、简介、制作阵容、分集表
- * - 交互部分（source/js/bangumi-detail.js 接管）：改状态 / 改进度 / 打分 / 短评，
- *   改动先落 localStorage，点「同步」后交给 GitHub Actions 写回 Bangumi
+ * 这是一个**纯静态只读页**：没有任何表单、不发任何请求、不加载 JS。
+ * 状态的事实来源是 Bangumi 本身，改状态请去 bangumi.vip，站点在每日定时构建时
+ * 会把最新数据拉回到 progress.json / bangumis.json。
  *
  * 数据源：
  * - bangumis.json   基础信息（hexo bangumis -u）
@@ -15,7 +14,7 @@
  * - episodes.json   分集表（tools/fetch-bangumi-episodes.js）
  * - progress.json   我的状态与进度（同上）
  *
- * 所有 id 都来自本地数据文件，不在这里发网络请求，构建可离线重复。
+ * 所有 id 都来自本地数据文件，构建期不发网络请求，可离线重复。
  */
 
 const fs = require('fs');
@@ -25,13 +24,13 @@ const DATA_DIR = '_data/bangumis';
 const SITE = 'https://bangumi.vip';
 
 // 收藏状态：Bangumi 的 type 取值
-const STATUS = [
-  { type: 1, label: '想看' },
-  { type: 3, label: '在看' },
-  { type: 2, label: '已看' },
-  { type: 4, label: '搁置' },
-  { type: 5, label: '抛弃' }
-];
+const STATUS = {
+  1: { label: '想看', cls: 'is-want' },
+  2: { label: '看过', cls: 'is-done' },
+  3: { label: '在看', cls: 'is-doing' },
+  4: { label: '搁置', cls: 'is-hold' },
+  5: { label: '抛弃', cls: 'is-drop' }
+};
 
 function esc(value) {
   return String(value === null || value === undefined ? '' : value)
@@ -61,6 +60,12 @@ function monthOf(text) {
   return m ? m[1] + ' 年 ' + Number(m[2]) + ' 月' : '';
 }
 
+/** 日期只留 "2025-07-07" 部分，避免 infobox 里的长描述撑破行 */
+function shortDate(text) {
+  const m = /(\d{4})-(\d{2})-(\d{2})/.exec(String(text || ''));
+  return m ? m[0] : String(text || '');
+}
+
 function episodeRows(eps, watchedCount) {
   if (!eps || !eps.length) {
     return '<p class="bgm-d__empty">这个条目还没有分集信息。</p>';
@@ -68,12 +73,12 @@ function episodeRows(eps, watchedCount) {
   return eps.map(function (ep, i) {
     const no = ep.sort == null ? i + 1 : ep.sort;
     const watched = i < watchedCount;
-    return '<label class="bgm-ep' + (watched ? ' is-watched' : '') + '">' +
-      '<input type="checkbox" data-ep="' + ep.id + '"' + (watched ? ' checked' : '') + '>' +
+    return '<div class="bgm-ep' + (watched ? ' is-watched' : '') + '">' +
+      '<span class="bgm-ep__mark" aria-hidden="true"></span>' +
       '<span class="bgm-ep__no">' + esc(no) + '</span>' +
       '<span class="bgm-ep__name">' + esc(ep.name || '第 ' + no + ' 话') + '</span>' +
-      '<span class="bgm-ep__date">' + esc(ep.airdate || '') + '</span>' +
-      '</label>';
+      '<span class="bgm-ep__date">' + esc(shortDate(ep.airdate)) + '</span>' +
+      '</div>';
   }).join('');
 }
 
@@ -105,9 +110,22 @@ hexo.extend.generator.register('bangumi-detail', function (locals) {
     const mine = progress[item.id] || { type: 0, rate: 0, ep_status: 0, comment: '' };
     const eps = (episodes[item.id] && episodes[item.id].eps) || [];
     const epCount = eps.length || Number(item.eps) || 0;
-    const watched = Math.min(Number(mine.ep_status) || 0, epCount);
+
+    // Bangumi 里「看过」本身就等于看完全部，ep_status 只是可选细粒度记录。
+    // 很多条目的 ep_status 是 0（在网页上直接标「看过」不会填进度），
+    // 照实显示会变成「看过 · 0 / 13 话」这种自相矛盾的文案，所以这里补齐。
+    const rawWatched = Number(mine.ep_status) || 0;
+    const isDone = Number(mine.type) === 2;
+    const watched = epCount > 0
+      ? (isDone && rawWatched === 0 ? epCount : Math.min(rawWatched, epCount))
+      : rawWatched;
     const name = item.name_cn || item.name || '未知条目';
     const orig = item.name_cn && item.name ? item.name : '';
+    const pct = epCount > 0 ? Math.round((watched / epCount) * 100) : 0;
+    const rate = Number(mine.rate) || 0;
+    const comment = String(mine.comment || '').trim();
+    const status = STATUS[Number(mine.type)] || null;
+    const subjectUrl = SITE + '/subject/' + item.id + '/';
 
     const score = item.rating && item.rating.score ? item.rating.score : '';
     const rank = item.rating && item.rating.rank ? '#' + item.rating.rank : '';
@@ -126,28 +144,6 @@ hexo.extend.generator.register('bangumi-detail', function (locals) {
       .map(function (k) { return kv(k === '动画制作' ? '制作' : k, meta[k]); })
       .filter(Boolean).join('');
 
-    // 交互面板初值
-    const payload = {
-      id: item.id,
-      type: Number(mine.type) || 0,
-      rate: Number(mine.rate) || 0,
-      epStatus: watched,
-      comment: mine.comment || '',
-      updatedAt: mine.updated_at || '',
-      eps: eps.map(function (ep) { return { id: ep.id, sort: ep.sort, name: ep.name, airdate: ep.airdate }; })
-    };
-
-    const statusBtns = STATUS.map(function (s) {
-      return '<button type="button" data-type="' + s.type + '"' +
-        (Number(mine.type) === s.type ? ' class="is-active"' : '') + '>' + s.label + '</button>';
-    }).join('');
-
-    const rateBtns = [];
-    for (let i = 1; i <= 10; i += 1) {
-      rateBtns.push('<button type="button" data-rate="' + i + '"' +
-        (Number(mine.rate) === i ? ' class="is-active"' : '') + '>' + i + '</button>');
-    }
-
     const contents = [
       '<link rel="stylesheet" href="/css/bangumi-detail.css">',
       '<div class="bgm-d" id="bgm-detail">',
@@ -160,45 +156,40 @@ hexo.extend.generator.register('bangumi-detail', function (locals) {
       orig ? '<p class="bgm-d__orig">' + esc(orig) + '</p>' : '',
       '<div class="bgm-d__chips">' + metaChips + '</div>',
       '<div class="bgm-d__staff">' + staff + '</div>',
-      '<a class="bgm-d__link" href="' + SITE + '/subject/' + item.id +
-      '" target="_blank" rel="noopener">在 Bangumi 查看条目 ↗</a>',
       '</div>',
       '</div>',
 
-      // ---- 我的记录 ----
-      '<section class="bgm-d__mine" id="bgm-mine">',
+      // ---- 我的记录（只读） ----
+      '<section class="bgm-d__mine">',
       '<div class="bgm-d__mine-head">',
       '<h2>我的记录</h2>',
-      '<span class="bgm-d__state" id="bgm-state" data-state="idle">未修改</span>',
+      status
+        ? '<span class="bgm-badge ' + status.cls + '">' + status.label + '</span>'
+        : '<span class="bgm-badge">未收藏</span>',
       '</div>',
-      '<div class="bgm-d__row">',
-      '<span class="bgm-d__label">状态</span>',
-      '<div class="bgm-seg" id="bgm-status">' + statusBtns + '</div>',
+
+      epCount
+        ? '<div class="bgm-d__prog">' +
+          '<span class="bgm-d__prog-num"><b>' + watched + '</b> / ' + epCount + ' 话</span>' +
+          '<span class="bgm-d__bar"><i style="width:' + pct + '%"></i></span>' +
+          '</div>'
+        : '',
+
+      '<div class="bgm-d__meta">',
+      '<span class="bgm-d__kv"><i>评分</i>' + (rate ? rate + ' 分' : '未评分') + '</span>',
+      mine.updated_at
+        ? '<span class="bgm-d__kv"><i>更新于</i>' + esc(shortDate(mine.updated_at)) + '</span>'
+        : '',
       '</div>',
-      '<div class="bgm-d__row">',
-      '<span class="bgm-d__label">进度</span>',
-      '<div class="bgm-prog">',
-      '<button type="button" class="bgm-prog__btn" data-step="-1" aria-label="减一集">−</button>',
-      '<span class="bgm-prog__num"><b id="bgm-prog-num">' + watched + '</b> / <i id="bgm-prog-total">' + epCount + '</i></span>',
-      '<button type="button" class="bgm-prog__btn" data-step="1" aria-label="加一集">＋</button>',
-      '<button type="button" class="bgm-prog__all" id="bgm-prog-all">全部看完</button>',
-      '</div>',
-      '</div>',
-      '<div class="bgm-d__row">',
-      '<span class="bgm-d__label">评分</span>',
-      '<div class="bgm-rate" id="bgm-rate">' + rateBtns.join('') +
-      '<button type="button" class="bgm-rate__clear" id="bgm-rate-clear">清除</button></div>',
-      '</div>',
-      '<div class="bgm-d__row">',
-      '<span class="bgm-d__label">短评</span>',
-      '<textarea class="bgm-comment" id="bgm-comment" maxlength="500" rows="3" ' +
-      'placeholder="一句话记一下感受，会同步到 Bangumi">' + esc(mine.comment || '') + '</textarea>',
-      '</div>',
+
+      comment
+        ? '<blockquote class="bgm-d__quote">' + esc(comment) + '</blockquote>'
+        : '',
+
       '<div class="bgm-d__foot">',
-      '<button type="button" class="bgm-btn bgm-btn--primary" id="bgm-sync">同步到 Bangumi</button>',
-      '<button type="button" class="bgm-btn" id="bgm-reset">放弃改动</button>',
-      '<button type="button" class="bgm-btn bgm-btn--ghost" id="bgm-setup">同步设置</button>',
-      '<span class="bgm-d__tip" id="bgm-tip">改动会先存在本机，点同步后约 1~2 分钟写回</span>',
+      '<a class="bgm-btn bgm-btn--primary" href="' + esc(subjectUrl) +
+      '" target="_blank" rel="noopener">去 Bangumi 记录 ↗</a>',
+      '<span class="bgm-d__tip">只读展示 · 状态每天随站点定时构建从 Bangumi 拉取</span>',
       '</div>',
       '</section>',
 
@@ -209,12 +200,10 @@ hexo.extend.generator.register('bangumi-detail', function (locals) {
         : '',
 
       // ---- 分集 ----
-      '<section class="bgm-d__sec"><h2>分集 <em id="bgm-ep-count">' + watched + ' / ' + epCount + '</em></h2>' +
-      '<div class="bgm-eps" id="bgm-eps">' + episodeRows(eps, watched) + '</div></section>',
+      '<section class="bgm-d__sec"><h2>分集 <em>' + watched + ' / ' + epCount + '</em></h2>' +
+      '<div class="bgm-eps">' + episodeRows(eps, watched) + '</div></section>',
 
-      '</div>',
-      '<script type="application/json" id="bgm-payload">' + JSON.stringify(payload) + '</script>',
-      '<script src="/js/bangumi-detail.js" defer></script>'
+      '</div>'
     ].filter(Boolean).join('\n');
 
     return {
