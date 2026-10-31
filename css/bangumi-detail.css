@@ -123,6 +123,49 @@ html[data-theme="dark"] .bgm-d {
   margin-right: 6px;
 }
 
+/* ---------- 站外搜索（方形按钮） ---------- */
+.bgm-d .bgm-d__find {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 16px;
+}
+.bgm-d .bgm-find {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  width: 64px;
+  height: 64px;
+  border: 1px solid var(--b-border);
+  border-radius: 14px;
+  background: var(--b-bg);
+  color: var(--b-text2);
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1.2;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: transform .18s, color .18s, border-color .18s, background .18s;
+}
+.bgm-d .bgm-find svg {
+  width: 22px;
+  height: 22px;
+  flex: 0 0 auto;
+}
+.bgm-d .bgm-find:hover {
+  transform: translateY(-2px);
+  border-color: currentColor;
+  background: var(--b-soft);
+}
+.bgm-d .bgm-find.is-bili:hover {
+  color: #fb7299;
+}
+.bgm-d .bgm-find.is-age:hover {
+  color: #ff7a45;
+}
+
 /* ---------- 我的记录（只读） ---------- */
 .bgm-d .bgm-d__mine {
   margin: 26px 0;
@@ -380,6 +423,20 @@ html[data-theme="dark"] .bgm-d {
   }
   .bgm-d .bgm-d__title {
     font-size: 18px;
+  }
+  .bgm-d .bgm-d__find {
+    gap: 8px;
+    margin-top: 12px;
+  }
+  .bgm-d .bgm-find {
+    width: 56px;
+    height: 56px;
+    gap: 3px;
+    font-size: 10.5px;
+  }
+  .bgm-d .bgm-find svg {
+    width: 19px;
+    height: 19px;
   }
   .bgm-d .bgm-d__mine {
     padding: 15px 14px 13px;
