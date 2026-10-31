@@ -281,8 +281,9 @@ html[data-theme="dark"] .bgm-page {
 /* ---------- 列表布局：封面左、文字右，信息更全 ---------- */
 .bgm-page .bgm-collection[data-layout="list"] .bgm-cd {
   flex-direction: row;
-  align-items: center;
-  gap: 13px;
+  /* 封面跟随卡片高度撑满，不再因为文字比图高而上下留空 */
+  align-items: stretch;
+  gap: 14px;
   padding: 10px 14px 10px 10px;
 }
 .bgm-page .bgm-collection[data-layout="list"] .bgm-cd:hover {
@@ -290,11 +291,13 @@ html[data-theme="dark"] .bgm-page {
 }
 .bgm-page .bgm-collection[data-layout="list"] .bgm-cd__cover {
   position: relative;
-  flex: 0 0 76px;
-  width: 76px;
+  flex: 0 0 104px;
+  width: 104px;
   height: auto;
-  aspect-ratio: 3 / 4;
-  border-radius: 8px;
+  /* 3:4 的基准高度，保证文字很少时封面也不会被压扁 */
+  min-height: 139px;
+  aspect-ratio: auto;
+  border-radius: 9px;
 }
 /* 列表视图的评分放在标题行右侧，封面上的胶囊隐藏 */
 .bgm-page .bgm-collection[data-layout="list"] .bgm-cd__cover .bgm-cd__score {
@@ -304,7 +307,9 @@ html[data-theme="dark"] .bgm-page {
   display: inline-block;
 }
 .bgm-page .bgm-collection[data-layout="list"] .bgm-cd__body {
-  display: block;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   flex: 1 1 auto;
   min-width: 0;
   padding: 0;
@@ -313,15 +318,22 @@ html[data-theme="dark"] .bgm-page {
   display: block;
   overflow: hidden;
   min-height: 0;
-  font-size: 15px;
+  font-size: 15.5px;
   white-space: nowrap;
   text-overflow: ellipsis;
 }
+/* 类型与话数已并入放送行，这行只在网格视图使用 */
 .bgm-page .bgm-collection[data-layout="list"] .bgm-cd__meta {
-  margin-top: 4px;
+  display: none;
 }
 .bgm-page .bgm-collection[data-layout="list"] .bgm-rich {
   display: block;
+}
+.bgm-page .bgm-collection[data-layout="list"] .bgm-row {
+  margin-top: 5px;
+}
+.bgm-page .bgm-collection[data-layout="list"] .bgm-sum {
+  margin-top: 6px;
 }
 
 /* ---------- 列表视图专属的富信息 ---------- */
@@ -473,13 +485,14 @@ html[data-theme="dark"] .bgm-page {
   }
   /* 列表视图在窄屏收敛一些，保证每一行都塞得下 */
   .bgm-page .bgm-collection[data-layout="list"] .bgm-cd {
-    align-items: flex-start;
-    gap: 10px;
+    align-items: stretch;
+    gap: 11px;
     padding: 8px 10px 8px 8px;
   }
   .bgm-page .bgm-collection[data-layout="list"] .bgm-cd__cover {
-    flex: 0 0 58px;
-    width: 58px;
+    flex: 0 0 68px;
+    width: 68px;
+    min-height: 91px;
   }
   .bgm-page .bgm-collection[data-layout="list"] .bgm-cd__body {
     padding: 0;
@@ -490,9 +503,15 @@ html[data-theme="dark"] .bgm-page {
   .bgm-page .bgm-row {
     gap: 3px 10px;
     font-size: 11.5px;
+    margin-top: 4px;
   }
   .bgm-page .bgm-sum {
     font-size: 11.5px;
+    margin-top: 5px;
+  }
+  /* 窄屏简介只留一行，避免卡片被文字拉得太高 */
+  .bgm-page .bgm-collection[data-layout="list"] .bgm-sum {
+    -webkit-line-clamp: 1;
   }
 }
 
