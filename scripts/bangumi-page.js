@@ -114,12 +114,15 @@ function kvHTML(label, value) {
 function richHTML(item, info, today) {
   const rows = [];
 
-  // 1) 放送：状态 + 开播日 + 星期 + 电视台 + 结束日
+  // 1) 放送：状态胶囊 + 类型 · 话数 · 开播日 · 星期 · 电视台 · 结束日
+  //    类型和话数原本单独占 meta 一行，列表视图里并进来，省一行高度。
   const start = parseDate(info['放送开始']) || parseDate(item.date);
   const airParts = [];
+  if (item.type) airParts.push(item.type);
+  if (item.eps) airParts.push('共 ' + item.eps + ' 话');
   if (start != null) airParts.push(isoDate(start) + ' 起');
   if (info['放送星期']) airParts.push('每' + info['放送星期'].replace(/^星期/, '周'));
-  if (info['播放电视台']) airParts.push('电视台 ' + clip(info['播放电视台'], 18));
+  if (info['播放电视台']) airParts.push(clip(info['播放电视台'], 16));
   const end = parseDate(info['播放结束']);
   if (end != null) airParts.push('至 ' + isoDate(end));
 
@@ -143,24 +146,11 @@ function richHTML(item, info, today) {
   if (info['原作']) staff.push(kvHTML('原作', clip(info['原作'], 26)));
   if (staff.length) rows.push('<span class="bgm-row">' + staff.join('') + '</span>');
 
-  // 3) 评分与收藏热度
-  const stats = [];
-  const rating = item.rating || {};
-  if (rating.score) {
-    const extra = [];
-    if (rating.rank) extra.push('#' + rating.rank);
-    if (rating.total) extra.push(rating.total + ' 人评');
-    stats.push(kvHTML('评分', rating.score + (extra.length ? '（' + extra.join(' · ') + '）' : '')));
-  }
-  const col = item.collection || {};
-  ['wish:想看', 'doing:在看', 'collect:已看'].forEach(function (spec) {
-    const p = spec.split(':');
-    if (col[p[0]]) stats.push(kvHTML(p[1], col[p[0]]));
-  });
-  if (stats.length) rows.push('<span class="bgm-row bgm-row--stats">' + stats.join('') + '</span>');
+  // 评分已在标题右侧显示，评分排名 / 全站收藏热度对个人追番页意义不大，
+  // 原先单独占一行会把文字撑到封面之外，这里不再输出。
 
-  // 4) 简介
-  const summary = clip(item.summary, 180);
+  // 3) 简介
+  const summary = clip(item.summary, 150);
   if (summary) rows.push('<span class="bgm-sum">' + esc(summary) + '</span>');
 
   if (!rows.length) return '';
