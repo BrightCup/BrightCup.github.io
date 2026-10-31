@@ -23,6 +23,17 @@ const path = require('path');
 const DATA_DIR = '_data/bangumis';
 const SITE = 'https://bangumi.vip';
 
+// 站外搜索按钮图标（内联 SVG，跟随 currentColor，不额外发请求）
+const SVG_OPEN = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" ' +
+  'stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">';
+const BILI_ICON = SVG_OPEN +
+  '<rect x="2.6" y="6.8" width="18.8" height="13.2" rx="3.6"/>' +
+  '<path d="M7.2 3.2l3 3M16.8 3.2l-3 3"/>' +
+  '<path d="M9 11v3.4M15 11v3.4"/></svg>';
+const AGE_ICON = SVG_OPEN +
+  '<circle cx="12" cy="12" r="8.8"/>' +
+  '<path d="M10.2 8.8l5.2 3.2-5.2 3.2z" fill="currentColor" stroke-width="1.2"/></svg>';
+
 // 收藏状态：Bangumi 的 type 取值
 const STATUS = {
   1: { label: '想看', cls: 'is-want' },
@@ -144,6 +155,19 @@ hexo.extend.generator.register('bangumi-detail', function (locals) {
       .map(function (k) { return kv(k === '动画制作' ? '制作' : k, meta[k]); })
       .filter(Boolean).join('');
 
+    // 站外搜索：用中文名优先，没有中文名时退回原名
+    const keyword = encodeURIComponent(item.name_cn || item.name || name);
+    const findRow = '<div class="bgm-d__find">' +
+      '<a class="bgm-find is-bili" href="https://search.bilibili.com/all?keyword=' + keyword +
+      '&amp;from_source=web_search" target="_blank" rel="noopener"' +
+      ' title="在哔哩哔哩搜索「' + esc(name) + '」" aria-label="在哔哩哔哩搜索 ' + esc(name) + '">' +
+      BILI_ICON + '<span>B站</span></a>' +
+      '<a class="bgm-find is-age" href="https://www.agedm.io/search?query=' + keyword + '"' +
+      ' target="_blank" rel="noopener"' +
+      ' title="在 AGE 动漫搜索「' + esc(name) + '」" aria-label="在 AGE 动漫搜索 ' + esc(name) + '">' +
+      AGE_ICON + '<span>AGE动漫</span></a>' +
+      '</div>';
+
     const contents = [
       '<link rel="stylesheet" href="/css/bangumi-detail.css">',
       '<div class="bgm-d" id="bgm-detail">',
@@ -156,6 +180,7 @@ hexo.extend.generator.register('bangumi-detail', function (locals) {
       orig ? '<p class="bgm-d__orig">' + esc(orig) + '</p>' : '',
       '<div class="bgm-d__chips">' + metaChips + '</div>',
       '<div class="bgm-d__staff">' + staff + '</div>',
+      findRow,
       '</div>',
       '</div>',
 
