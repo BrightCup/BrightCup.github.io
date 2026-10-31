@@ -1,0 +1,933 @@
+{
+  "51": {
+    "type": 3,
+    "rate": 0,
+    "ep_status": 0,
+    "comment": "",
+    "updated_at": "2026-09-24T02:54:08+08:00"
+  },
+  "259": {
+    "type": 2,
+    "rate": 0,
+    "ep_status": 0,
+    "comment": "",
+    "updated_at": "2026-09-24T03:01:13+08:00"
+  },
+  "290": {
+    "type": 2,
+    "rate": 0,
+    "ep_status": 0,
+    "comment": "",
+    "updated_at": "2026-09-24T02:59:41+08:00"
+  },
+  "827": {
+    "type": 2,
+    "rate": 0,
+    "ep_status": 0,
+    "comment": "",
+    "updated_at": "2026-09-24T03:04:03+08:00"
+  },
+  "909": {
+    "type": 1,
+    "rate": 0,
+    "ep_status": 0,
+    "comment": "",
+    "updated_at": "2026-09-24T02:54:01+08:00"
+  },
+  "927": {
+    "type": 2,
+    "rate": 0,
+    "ep_status": 0,
+    "comment": "",
+    "updated_at": "2026-09-24T02:54:39+08:00"
+  },
+  "1014": {
+    "type": 2,
+    "rate": 0,
+    "ep_status": 0,
+    "comment": "",
+    "updated_at": "2026-09-24T02:57:51+08:00"
+  },
+  "1773": {
+    "type": 2,
+    "rate": 0,
+    "ep_status": 0,
+    "comment": "",
+    "updated_at": "2026-09-24T02:54:42+08:00"
+  },
+  "1940": {
+    "type": 2,
+    "rate": 0,
+    "ep_status": 0,
+    "comment": "",
+    "updated_at": "2026-09-24T03:02:27+08:00"
+  },
+  "2585": {
+    "type": 2,
+    "rate": 0,
+    "ep_status": 0,
+    "comment": "",
+    "updated_at": "2026-09-24T02:54:47+08:00"
+  },
+  "7157": {
+    "type": 2,
+    "rate": 0,
+    "ep_status": 0,
+    "comment": "",
+    "updated_at": "2026-09-24T02:58:09+08:00"
+  },
+  "9912": {
+    "type": 3,
+    "rate": 0,
+    "ep_status": 0,
+    "comment": "",
+    "updated_at": "2026-09-24T02:55:11+08:00"
+  },
+  "10380": {
+    "type": 2,
+    "rate": 0,
+    "ep_status": 0,
+    "comment": "",
+    "updated_at": "2026-09-24T02:53:14+08:00"
+  },
+  "10440": {
+    "type": 2,
+    "rate": 0,
+    "ep_status": 0,
+    "comment": "",
+    "updated_at": "2026-09-24T02:54:17+08:00"
+  },
+  "10639": {
+    "type": 2,
+    "rate": 0,
+    "ep_status": 0,
+    "comment": "",
+    "updated_at": "2026-09-24T02:53:38+08:00"
+  },
+  "12544": {
+    "type": 2,
+    "rate": 0,
+    "ep_status": 0,
+    "comment": "",
+    "updated_at": "2026-09-24T03:04:10+08:00"
+  },
+  "16235": {
+    "type": 1,
+    "rate": 0,
+    "ep_status": 0,
+    "comment": "",
+    "updated_at": "2026-09-24T02:59:45+08:00"
+  },
+  "20851": {
+    "type": 2,
+    "rate": 0,
+    "ep_status": 0,
+    "comment": "",
+    "updated_at": "2026-09-24T02:59:58+08:00"
+  },
+  "22759": {
+    "type": 1,
+    "rate": 0,
+    "ep_status": 0,
+    "comment": "",
+    "updated_at": "2026-09-24T03:03:36+08:00"
+  },
+  "23119": {
+    "type": 1,
+    "rate": 0,
+    "ep_status": 0,
+    "comment": "",
+    "updated_at": "2026-09-24T02:58:33+08:00"
+  },
+  "23686": {
+    "type": 2,
+    "rate": 0,
+    "ep_status": 0,
+    "comment": "",
+    "updated_at": "2026-09-24T02:54:20+08:00"
+  },
+  "27364": {
+    "type": 2,
+    "rate": 0,
+    "ep_status": 0,
+    "comment": "",
+    "updated_at": "2026-09-24T02:53:33+08:00"
+  },
+  "29648": {
+    "type": 2,
+    "rate": 0,
+    "ep_status": 0,
+    "comment": "",
+    "updated_at": "2026-09-24T02:53:55+08:00"
+  },
+  "37154": {
+    "type": 1,
+    "rate": 0,
+    "ep_status": 0,
+    "comment": "",
+    "updated_at": "2026-09-24T03:09:05+08:00"
+  },
+  "49131": {
+    "type": 2,
+    "rate": 0,
+    "ep_status": 0,
+    "comment": "",
+    "updated_at": "2026-09-24T02:57:18+08:00"
+  },
+  "49278": {
+    "type": 1,
+    "rate": 0,
+    "ep_status": 0,
+    "comment": "",
+    "updated_at": "2026-09-24T02:59:31+08:00"
+  },
+  "51928": {
+    "type": 2,
+    "rate": 0,
+    "ep_status": 0,
+    "comment": "",
+    "updated_at": "2026-09-24T02:56:34+08:00"
+  },
+  "54433": {
+    "type": 2,
+    "rate": 0,
+    "ep_status": 0,
+    "comment": "",
+    "updated_at": "2026-09-24T02:54:29+08:00"
+  },
+  "55113": {
+    "type": 2,
+    "rate": 0,
+    "ep_status": 0,
+    "comment": "",
+    "updated_at": "2026-09-24T02:58:21+08:00"
+  },
+  "58949": {
+    "type": 1,
+    "rate": 0,
+    "ep_status": 0,
+    "comment": "",
+    "updated_at": "2026-09-24T02:57:42+08:00"
+  },
+  "69496": {
+    "type": 2,
+    "rate": 0,
+    "ep_status": 0,
+    "comment": "",
+    "updated_at": "2026-09-24T03:06:16+08:00"
+  },
+  "72942": {
+    "type": 1,
+    "rate": 0,
+    "ep_status": 0,
+    "comment": "",
+    "updated_at": "2026-09-24T02:57:03+08:00"
+  },
+  "90880": {
+    "type": 2,
+    "rate": 0,
+    "ep_status": 0,
+    "comment": "",
+    "updated_at": "2026-09-24T02:57:46+08:00"
+  },
+  "92382": {
+    "type": 2,
+    "rate": 0,
+    "ep_status": 0,
+    "comment": "",
+    "updated_at": "2026-09-24T02:58:25+08:00"
+  },
+  "95225": {
+    "type": 2,
+    "rate": 0,
+    "ep_status": 0,
+    "comment": "",
+    "updated_at": "2026-09-24T02:55:36+08:00"
+  },
+  "100403": {
+    "type": 2,
+    "rate": 0,
+    "ep_status": 0,
+    "comment": "",
+    "updated_at": "2026-09-24T02:55:28+08:00"
+  },
+  "100444": {
+    "type": 2,
+    "rate": 0,
+    "ep_status": 0,
+    "comment": "",
+    "updated_at": "2026-09-24T02:54:58+08:00"
+  },
+  "100449": {
+    "type": 2,
+    "rate": 0,
+    "ep_status": 0,
+    "comment": "",
+    "updated_at": "2026-09-24T02:55:21+08:00"
+  },
+  "102134": {
+    "type": 1,
+    "rate": 0,
+    "ep_status": 0,
+    "comment": "",
+    "updated_at": "2026-09-24T02:55:31+08:00"
+  },
+  "105426": {
+    "type": 2,
+    "rate": 0,
+    "ep_status": 0,
+    "comment": "",
+    "updated_at": "2026-09-24T03:08:26+08:00"
+  },
+  "109375": {
+    "type": 2,
+    "rate": 0,
+    "ep_status": 0,
+    "comment": "",
+    "updated_at": "2026-09-24T03:00:06+08:00"
+  },
+  "109386": {
+    "type": 2,
+    "rate": 0,
+    "ep_status": 0,
+    "comment": "",
+    "updated_at": "2026-09-24T02:55:50+08:00"
+  },
+  "112146": {
+    "type": 2,
+    "rate": 0,
+    "ep_status": 0,
+    "comment": "",
+    "updated_at": "2026-09-24T02:58:07+08:00"
+  },
+  "129807": {
+    "type": 2,
+    "rate": 0,
+    "ep_status": 0,
+    "comment": "",
+    "updated_at": "2026-09-24T02:58:15+08:00"
+  },
+  "132734": {
+    "type": 2,
+    "rate": 0,
+    "ep_status": 0,
+    "comment": "",
+    "updated_at": "2026-09-24T02:58:04+08:00"
+  },
+  "133860": {
+    "type": 2,
+    "rate": 0,
+    "ep_status": 0,
+    "comment": "",
+    "updated_at": "2026-09-24T03:04:30+08:00"
+  },
+  "148099": {
+    "type": 1,
+    "rate": 0,
+    "ep_status": 0,
+    "comment": "",
+    "updated_at": "2026-09-24T03:01:09+08:00"
+  },
+  "150746": {
+    "type": 3,
+    "rate": 0,
+    "ep_status": 0,
+    "comment": "",
+    "updated_at": "2026-09-24T03:01:19+08:00"
+  },
+  "160209": {
+    "type": 2,
+    "rate": 0,
+    "ep_status": 0,
+    "comment": "",
+    "updated_at": "2026-09-24T02:53:24+08:00"
+  },
+  "165829": {
+    "type": 2,
+    "rate": 0,
+    "ep_status": 0,
+    "comment": "",
+    "updated_at": "2026-09-24T02:59:38+08:00"
+  },
+  "172498": {
+    "type": 2,
+    "rate": 0,
+    "ep_status": 0,
+    "comment": "",
+    "updated_at": "2026-09-24T02:55:25+08:00"
+  },
+  "175599": {
+    "type": 2,
+    "rate": 0,
+    "ep_status": 0,
+    "comment": "",
+    "updated_at": "2026-09-24T03:00:20+08:00"
+  },
+  "175600": {
+    "type": 2,
+    "rate": 0,
+    "ep_status": 0,
+    "comment": "",
+    "updated_at": "2026-09-24T03:02:31+08:00"
+  },
+  "181354": {
+    "type": 2,
+    "rate": 0,
+    "ep_status": 0,
+    "comment": "",
+    "updated_at": "2026-09-24T02:57:32+08:00"
+  },
+  "198395": {
+    "type": 2,
+    "rate": 0,
+    "ep_status": 0,
+    "comment": "",
+    "updated_at": "2026-09-24T03:08:36+08:00"
+  },
+  "203526": {
+    "type": 1,
+    "rate": 0,
+    "ep_status": 0,
+    "comment": "",
+    "updated_at": "2026-09-24T02:57:05+08:00"
+  },
+  "204027": {
+    "type": 2,
+    "rate": 0,
+    "ep_status": 0,
+    "comment": "",
+    "updated_at": "2026-09-24T03:00:44+08:00"
+  },
+  "207573": {
+    "type": 2,
+    "rate": 0,
+    "ep_status": 0,
+    "comment": "",
+    "updated_at": "2026-09-24T02:58:01+08:00"
+  },
+  "208754": {
+    "type": 2,
+    "rate": 0,
+    "ep_status": 0,
+    "comment": "",
+    "updated_at": "2026-09-24T03:01:51+08:00"
+  },
+  "209408": {
+    "type": 1,
+    "rate": 0,
+    "ep_status": 0,
+    "comment": "",
+    "updated_at": "2026-09-24T03:06:31+08:00"
+  },
+  "211027": {
+    "type": 3,
+    "rate": 0,
+    "ep_status": 0,
+    "comment": "",
+    "updated_at": "2026-09-24T03:00:57+08:00"
+  },
+  "219200": {
+    "type": 2,
+    "rate": 0,
+    "ep_status": 0,
+    "comment": "",
+    "updated_at": "2026-09-24T03:01:03+08:00"
+  },
+  "221736": {
+    "type": 2,
+    "rate": 0,
+    "ep_status": 0,
+    "comment": "",
+    "updated_at": "2026-09-24T03:04:24+08:00"
+  },
+  "228715": {
+    "type": 2,
+    "rate": 0,
+    "ep_status": 0,
+    "comment": "",
+    "updated_at": "2026-09-24T03:09:16+08:00"
+  },
+  "231497": {
+    "type": 2,
+    "rate": 0,
+    "ep_status": 0,
+    "comment": "",
+    "updated_at": "2026-09-24T03:00:52+08:00"
+  },
+  "234349": {
+    "type": 1,
+    "rate": 0,
+    "ep_status": 0,
+    "comment": "",
+    "updated_at": "2026-09-24T03:05:06+08:00"
+  },
+  "235612": {
+    "type": 2,
+    "rate": 0,
+    "ep_status": 0,
+    "comment": "",
+    "updated_at": "2026-09-24T02:59:52+08:00"
+  },
+  "239816": {
+    "type": 2,
+    "rate": 0,
+    "ep_status": 0,
+    "comment": "",
+    "updated_at": "2026-09-24T02:30:26+08:00"
+  },
+  "240038": {
+    "type": 2,
+    "rate": 0,
+    "ep_status": 0,
+    "comment": "",
+    "updated_at": "2026-09-24T02:54:23+08:00"
+  },
+  "245665": {
+    "type": 3,
+    "rate": 0,
+    "ep_status": 0,
+    "comment": "",
+    "updated_at": "2026-09-24T02:55:01+08:00"
+  },
+  "248175": {
+    "type": 2,
+    "rate": 0,
+    "ep_status": 0,
+    "comment": "",
+    "updated_at": "2026-09-24T02:53:42+08:00"
+  },
+  "251831": {
+    "type": 2,
+    "rate": 0,
+    "ep_status": 0,
+    "comment": "",
+    "updated_at": "2026-09-24T03:04:56+08:00"
+  },
+  "255209": {
+    "type": 2,
+    "rate": 0,
+    "ep_status": 11,
+    "comment": "",
+    "updated_at": "2026-10-13T13:39:41+08:00"
+  },
+  "260680": {
+    "type": 2,
+    "rate": 0,
+    "ep_status": 0,
+    "comment": "",
+    "updated_at": "2026-09-24T02:59:34+08:00"
+  },
+  "269235": {
+    "type": 2,
+    "rate": 0,
+    "ep_status": 0,
+    "comment": "",
+    "updated_at": "2026-09-24T02:56:19+08:00"
+  },
+  "271151": {
+    "type": 2,
+    "rate": 0,
+    "ep_status": 0,
+    "comment": "",
+    "updated_at": "2026-09-24T03:03:46+08:00"
+  },
+  "278815": {
+    "type": 2,
+    "rate": 0,
+    "ep_status": 0,
+    "comment": "",
+    "updated_at": "2026-09-24T03:09:26+08:00"
+  },
+  "278899": {
+    "type": 2,
+    "rate": 0,
+    "ep_status": 0,
+    "comment": "",
+    "updated_at": "2026-09-24T03:09:40+08:00"
+  },
+  "292970": {
+    "type": 1,
+    "rate": 0,
+    "ep_status": 0,
+    "comment": "",
+    "updated_at": "2026-09-24T02:56:54+08:00"
+  },
+  "293049": {
+    "type": 2,
+    "rate": 0,
+    "ep_status": 0,
+    "comment": "",
+    "updated_at": "2026-09-24T02:54:11+08:00"
+  },
+  "294993": {
+    "type": 2,
+    "rate": 0,
+    "ep_status": 0,
+    "comment": "",
+    "updated_at": "2026-09-24T02:56:57+08:00"
+  },
+  "296367": {
+    "type": 2,
+    "rate": 0,
+    "ep_status": 0,
+    "comment": "",
+    "updated_at": "2026-09-24T03:01:16+08:00"
+  },
+  "301541": {
+    "type": 2,
+    "rate": 0,
+    "ep_status": 0,
+    "comment": "",
+    "updated_at": "2026-09-24T03:01:28+08:00"
+  },
+  "304065": {
+    "type": 2,
+    "rate": 0,
+    "ep_status": 0,
+    "comment": "",
+    "updated_at": "2026-09-24T03:13:34+08:00"
+  },
+  "309311": {
+    "type": 2,
+    "rate": 0,
+    "ep_status": 0,
+    "comment": "",
+    "updated_at": "2026-09-24T02:54:32+08:00"
+  },
+  "315069": {
+    "type": 2,
+    "rate": 0,
+    "ep_status": 0,
+    "comment": "",
+    "updated_at": "2026-09-24T02:58:54+08:00"
+  },
+  "317613": {
+    "type": 2,
+    "rate": 0,
+    "ep_status": 0,
+    "comment": "",
+    "updated_at": "2026-09-24T02:54:53+08:00"
+  },
+  "317614": {
+    "type": 2,
+    "rate": 0,
+    "ep_status": 0,
+    "comment": "",
+    "updated_at": "2026-09-24T03:09:10+08:00"
+  },
+  "321885": {
+    "type": 1,
+    "rate": 0,
+    "ep_status": 0,
+    "comment": "",
+    "updated_at": "2026-09-24T02:57:00+08:00"
+  },
+  "325285": {
+    "type": 2,
+    "rate": 0,
+    "ep_status": 0,
+    "comment": "",
+    "updated_at": "2026-09-24T02:55:56+08:00"
+  },
+  "325767": {
+    "type": 2,
+    "rate": 0,
+    "ep_status": 0,
+    "comment": "",
+    "updated_at": "2026-09-23T23:16:35+08:00"
+  },
+  "326895": {
+    "type": 2,
+    "rate": 0,
+    "ep_status": 0,
+    "comment": "",
+    "updated_at": "2026-09-24T02:55:53+08:00"
+  },
+  "329906": {
+    "type": 2,
+    "rate": 0,
+    "ep_status": 0,
+    "comment": "",
+    "updated_at": "2026-09-24T02:54:50+08:00"
+  },
+  "331559": {
+    "type": 2,
+    "rate": 0,
+    "ep_status": 0,
+    "comment": "",
+    "updated_at": "2026-09-24T03:07:08+08:00"
+  },
+  "333158": {
+    "type": 3,
+    "rate": 0,
+    "ep_status": 0,
+    "comment": "",
+    "updated_at": "2026-09-24T02:57:10+08:00"
+  },
+  "347887": {
+    "type": 2,
+    "rate": 0,
+    "ep_status": 0,
+    "comment": "",
+    "updated_at": "2026-09-24T03:06:20+08:00"
+  },
+  "362577": {
+    "type": 2,
+    "rate": 0,
+    "ep_status": 0,
+    "comment": "",
+    "updated_at": "2026-09-24T02:59:23+08:00"
+  },
+  "364450": {
+    "type": 3,
+    "rate": 0,
+    "ep_status": 0,
+    "comment": "",
+    "updated_at": "2026-09-24T02:56:48+08:00"
+  },
+  "369304": {
+    "type": 2,
+    "rate": 0,
+    "ep_status": 0,
+    "comment": "",
+    "updated_at": "2026-09-24T03:03:19+08:00"
+  },
+  "373267": {
+    "type": 2,
+    "rate": 0,
+    "ep_status": 0,
+    "comment": "",
+    "updated_at": "2026-09-24T02:58:35+08:00"
+  },
+  "375817": {
+    "type": 2,
+    "rate": 0,
+    "ep_status": 0,
+    "comment": "",
+    "updated_at": "2026-09-24T03:00:37+08:00"
+  },
+  "386809": {
+    "type": 2,
+    "rate": 0,
+    "ep_status": 0,
+    "comment": "",
+    "updated_at": "2026-09-24T02:55:44+08:00"
+  },
+  "389474": {
+    "type": 2,
+    "rate": 0,
+    "ep_status": 0,
+    "comment": "",
+    "updated_at": "2026-09-24T03:05:18+08:00"
+  },
+  "394260": {
+    "type": 2,
+    "rate": 0,
+    "ep_status": 0,
+    "comment": "",
+    "updated_at": "2026-09-24T02:58:28+08:00"
+  },
+  "400602": {
+    "type": 2,
+    "rate": 0,
+    "ep_status": 0,
+    "comment": "",
+    "updated_at": "2026-09-24T02:53:28+08:00"
+  },
+  "411427": {
+    "type": 2,
+    "rate": 0,
+    "ep_status": 0,
+    "comment": "",
+    "updated_at": "2026-09-24T03:01:23+08:00"
+  },
+  "424663": {
+    "type": 3,
+    "rate": 0,
+    "ep_status": 0,
+    "comment": "",
+    "updated_at": "2026-09-24T03:00:32+08:00"
+  },
+  "425211": {
+    "type": 2,
+    "rate": 0,
+    "ep_status": 0,
+    "comment": "",
+    "updated_at": "2026-09-24T03:02:59+08:00"
+  },
+  "428735": {
+    "type": 2,
+    "rate": 0,
+    "ep_status": 0,
+    "comment": "",
+    "updated_at": "2026-09-24T02:53:47+08:00"
+  },
+  "441795": {
+    "type": 2,
+    "rate": 0,
+    "ep_status": 0,
+    "comment": "",
+    "updated_at": "2026-09-24T03:00:11+08:00"
+  },
+  "443831": {
+    "type": 1,
+    "rate": 0,
+    "ep_status": 0,
+    "comment": "",
+    "updated_at": "2026-09-24T03:06:48+08:00"
+  },
+  "454684": {
+    "type": 2,
+    "rate": 0,
+    "ep_status": 0,
+    "comment": "",
+    "updated_at": "2026-09-24T02:57:25+08:00"
+  },
+  "456079": {
+    "type": 2,
+    "rate": 0,
+    "ep_status": 0,
+    "comment": "",
+    "updated_at": "2026-09-24T00:06:31+08:00"
+  },
+  "456080": {
+    "type": 2,
+    "rate": 0,
+    "ep_status": 0,
+    "comment": "",
+    "updated_at": "2026-09-23T23:02:47+08:00"
+  },
+  "464376": {
+    "type": 2,
+    "rate": 0,
+    "ep_status": 0,
+    "comment": "",
+    "updated_at": "2026-09-24T02:54:14+08:00"
+  },
+  "470660": {
+    "type": 1,
+    "rate": 0,
+    "ep_status": 0,
+    "comment": "",
+    "updated_at": "2026-09-24T03:00:49+08:00"
+  },
+  "472741": {
+    "type": 2,
+    "rate": 0,
+    "ep_status": 0,
+    "comment": "",
+    "updated_at": "2026-09-24T03:08:48+08:00"
+  },
+  "501958": {
+    "type": 2,
+    "rate": 0,
+    "ep_status": 0,
+    "comment": "",
+    "updated_at": "2026-09-24T03:08:55+08:00"
+  },
+  "513878": {
+    "type": 1,
+    "rate": 0,
+    "ep_status": 0,
+    "comment": "",
+    "updated_at": "2026-09-24T02:29:25+08:00"
+  },
+  "515759": {
+    "type": 3,
+    "rate": 0,
+    "ep_status": 0,
+    "comment": "",
+    "updated_at": "2026-09-24T03:02:20+08:00"
+  },
+  "524707": {
+    "type": 3,
+    "rate": 0,
+    "ep_status": 0,
+    "comment": "",
+    "updated_at": "2026-09-24T03:02:38+08:00"
+  },
+  "554779": {
+    "type": 3,
+    "rate": 0,
+    "ep_status": 0,
+    "comment": "",
+    "updated_at": "2026-10-13T16:27:55+08:00"
+  },
+  "564289": {
+    "type": 2,
+    "rate": 0,
+    "ep_status": 0,
+    "comment": "",
+    "updated_at": "2026-09-24T00:07:20+08:00"
+  },
+  "565802": {
+    "type": 1,
+    "rate": 0,
+    "ep_status": 0,
+    "comment": "",
+    "updated_at": "2026-09-24T03:04:46+08:00"
+  },
+  "571784": {
+    "type": 3,
+    "rate": 0,
+    "ep_status": 2,
+    "comment": "",
+    "updated_at": "2026-09-23T23:17:34+08:00"
+  },
+  "580133": {
+    "type": 2,
+    "rate": 0,
+    "ep_status": 0,
+    "comment": "",
+    "updated_at": "2026-10-13T14:42:01+08:00"
+  },
+  "587109": {
+    "type": 2,
+    "rate": 0,
+    "ep_status": 11,
+    "comment": "",
+    "updated_at": "2026-10-13T13:39:31+08:00"
+  },
+  "595106": {
+    "type": 2,
+    "rate": 0,
+    "ep_status": 11,
+    "comment": "",
+    "updated_at": "2026-10-13T13:39:27+08:00"
+  },
+  "604826": {
+    "type": 2,
+    "rate": 0,
+    "ep_status": 0,
+    "comment": "",
+    "updated_at": "2026-09-26T12:02:32+08:00"
+  },
+  "617123": {
+    "type": 2,
+    "rate": 0,
+    "ep_status": 0,
+    "comment": "",
+    "updated_at": "2026-09-24T00:04:01+08:00"
+  },
+  "622206": {
+    "type": 2,
+    "rate": 0,
+    "ep_status": 11,
+    "comment": "",
+    "updated_at": "2026-10-13T13:39:36+08:00"
+  },
+  "622288": {
+    "type": 3,
+    "rate": 0,
+    "ep_status": 3,
+    "comment": "",
+    "updated_at": "2026-10-17T04:11:11+08:00"
+  },
+  "627136": {
+    "type": 2,
+    "rate": 0,
+    "ep_status": 0,
+    "comment": "",
+    "updated_at": "2026-09-24T00:04:28+08:00"
+  }
+}

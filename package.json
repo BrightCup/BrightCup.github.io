@@ -3,11 +3,12 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "build": "node tools/fetch-bangumi-infobox.js && hexo generate",
+    "build": "node tools/fetch-bangumi-infobox.js && node tools/fetch-bangumi-episodes.js && hexo generate",
     "clean": "hexo clean",
     "deploy": "hexo deploy",
     "server": "hexo server",
-    "bangumi:info": "node tools/fetch-bangumi-infobox.js"
+    "bangumi:info": "node tools/fetch-bangumi-infobox.js",
+    "bangumi:eps": "node tools/fetch-bangumi-episodes.js"
   },
   "hexo": {
     "version": "8.1.2"

@@ -1,0 +1,585 @@
+/*! 番剧详情页 (bangumi-detail) —— 与 /bangumis/、/schedule/ 共用同一套设计变量 */
+
+.bgm-d {
+  --b-bg: #ffffff;
+  --b-soft: #f6f7fb;
+  --b-border: #eaeaf0;
+  --b-text: #2b2b33;
+  --b-text2: #6b6b78;
+  --b-text3: #9c9caa;
+  --b-accent: #425aef;
+  --b-accent-soft: #eef1fe;
+  --b-shadow: 0 2px 14px rgba(28, 32, 60, .06);
+  --b-shadow-hover: 0 8px 24px rgba(28, 32, 60, .14);
+  --b-shadow-sm: 0 1px 5px rgba(28, 32, 60, .12);
+  --b-on-accent: #ffffff;
+  --b-ok: #2f9e5f;
+  --b-warn: #c9821b;
+  --b-err: #d64545;
+  font-size: 15px;
+  line-height: 1.65;
+  color: var(--b-text);
+}
+
+html[data-theme="dark"] .bgm-d {
+  --b-bg: #1c1c22;
+  --b-soft: #26262e;
+  --b-border: #33333d;
+  --b-text: #e7e7ec;
+  --b-text2: #a6a6b2;
+  --b-text3: #7a7a86;
+  --b-accent: #7d90ff;
+  --b-accent-soft: #272c46;
+  --b-shadow: 0 2px 14px rgba(0, 0, 0, .38);
+  --b-shadow-hover: 0 8px 24px rgba(0, 0, 0, .55);
+  --b-shadow-sm: 0 1px 5px rgba(0, 0, 0, .45);
+  --b-on-accent: #14141a;
+  --b-ok: #4fbe83;
+  --b-warn: #e0a445;
+  --b-err: #ef6b6b;
+}
+
+.bgm-d .bgm-d__back {
+  display: inline-block;
+  margin-bottom: 16px;
+  color: var(--b-text2);
+  font-size: 13px;
+  text-decoration: none;
+  transition: color .18s;
+}
+.bgm-d .bgm-d__back:hover {
+  color: var(--b-accent);
+}
+
+/* ---------- 头部 ---------- */
+.bgm-d .bgm-d__hero {
+  display: grid;
+  grid-template-columns: 190px minmax(0, 1fr);
+  gap: 22px;
+  align-items: start;
+}
+
+.bgm-d .bgm-d__cover {
+  position: relative;
+  aspect-ratio: 3 / 4;
+  border-radius: 14px;
+  overflow: hidden;
+  background: var(--b-soft);
+  box-shadow: var(--b-shadow);
+}
+.bgm-d .bgm-d__cover img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.bgm-d .bgm-d__title {
+  margin: 0 0 6px;
+  font-size: 24px;
+  line-height: 1.35;
+  font-weight: 700;
+  color: var(--b-text);
+}
+.bgm-d .bgm-d__orig {
+  margin: 0 0 14px;
+  font-size: 13px;
+  color: var(--b-text3);
+  word-break: break-word;
+}
+
+.bgm-d .bgm-d__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 14px;
+}
+.bgm-d .bgm-d__chip {
+  padding: 2px 10px;
+  border-radius: 999px;
+  background: var(--b-soft);
+  color: var(--b-text2);
+  font-size: 12px;
+  line-height: 1.7;
+}
+.bgm-d .bgm-d__chip.is-score {
+  background: var(--b-accent-soft);
+  color: var(--b-accent);
+  font-weight: 600;
+}
+
+.bgm-d .bgm-d__staff {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 18px;
+  margin-bottom: 14px;
+}
+.bgm-d .bgm-d__kv {
+  font-size: 13px;
+  color: var(--b-text2);
+}
+.bgm-d .bgm-d__kv i {
+  font-style: normal;
+  color: var(--b-text3);
+  margin-right: 6px;
+}
+
+.bgm-d .bgm-d__link {
+  display: inline-block;
+  font-size: 13px;
+  color: var(--b-accent);
+  text-decoration: none;
+  border-bottom: 1px dashed currentColor;
+  padding-bottom: 1px;
+}
+.bgm-d .bgm-d__link:hover {
+  opacity: .8;
+}
+
+/* ---------- 我的记录 ---------- */
+.bgm-d .bgm-d__mine {
+  margin: 26px 0 26px;
+  padding: 18px 20px 16px;
+  border: 1px solid var(--b-border);
+  border-radius: 16px;
+  background: var(--b-soft);
+}
+
+.bgm-d .bgm-d__mine-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 6px;
+}
+.bgm-d .bgm-d__mine-head h2 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--b-text);
+}
+
+.bgm-d .bgm-d__state {
+  font-size: 12px;
+  color: var(--b-text3);
+  white-space: nowrap;
+}
+.bgm-d .bgm-d__state[data-state="dirty"] { color: var(--b-warn); }
+.bgm-d .bgm-d__state[data-state="busy"] { color: var(--b-accent); }
+.bgm-d .bgm-d__state[data-state="ok"] { color: var(--b-ok); }
+.bgm-d .bgm-d__state[data-state="error"] { color: var(--b-err); }
+
+.bgm-d .bgm-d__row {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 9px 0;
+  border-top: 1px solid var(--b-border);
+}
+.bgm-d .bgm-d__row:first-of-type {
+  border-top: 0;
+}
+.bgm-d .bgm-d__label {
+  flex: 0 0 42px;
+  padding-top: 5px;
+  font-size: 13px;
+  color: var(--b-text3);
+}
+
+/* 状态切换 */
+.bgm-d .bgm-seg {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  padding: 4px;
+  border-radius: 11px;
+  background: var(--b-bg);
+  border: 1px solid var(--b-border);
+}
+.bgm-d .bgm-seg button {
+  appearance: none;
+  border: 0;
+  margin: 0;
+  padding: 5px 13px;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--b-text2);
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.5;
+  cursor: pointer;
+  transition: background .18s, color .18s, box-shadow .18s;
+}
+.bgm-d .bgm-seg button:hover {
+  color: var(--b-accent);
+}
+.bgm-d .bgm-seg button.is-active {
+  background: var(--b-accent);
+  color: var(--b-on-accent);
+  box-shadow: var(--b-shadow-sm);
+}
+
+/* 进度 */
+.bgm-d .bgm-prog {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding-top: 2px;
+}
+.bgm-d .bgm-prog__btn {
+  appearance: none;
+  width: 30px;
+  height: 30px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--b-border);
+  border-radius: 9px;
+  background: var(--b-bg);
+  color: var(--b-text2);
+  font-size: 15px;
+  line-height: 1;
+  cursor: pointer;
+  transition: color .18s, border-color .18s;
+}
+.bgm-d .bgm-prog__btn:hover {
+  color: var(--b-accent);
+  border-color: var(--b-accent);
+}
+.bgm-d .bgm-prog__num {
+  min-width: 68px;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+  color: var(--b-text3);
+  font-size: 13px;
+}
+.bgm-d .bgm-prog__num b {
+  font-size: 17px;
+  color: var(--b-text);
+}
+.bgm-d .bgm-prog__all {
+  appearance: none;
+  margin-left: 2px;
+  padding: 5px 12px;
+  border: 1px solid var(--b-border);
+  border-radius: 9px;
+  background: var(--b-bg);
+  color: var(--b-text2);
+  font-size: 12px;
+  cursor: pointer;
+  transition: color .18s, border-color .18s;
+}
+.bgm-d .bgm-prog__all:hover {
+  color: var(--b-accent);
+  border-color: var(--b-accent);
+}
+
+/* 评分 */
+.bgm-d .bgm-rate {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  padding-top: 2px;
+}
+.bgm-d .bgm-rate button {
+  appearance: none;
+  width: 27px;
+  height: 27px;
+  border: 1px solid var(--b-border);
+  border-radius: 8px;
+  background: var(--b-bg);
+  color: var(--b-text3);
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+  cursor: pointer;
+  transition: background .16s, color .16s, border-color .16s;
+}
+.bgm-d .bgm-rate button:hover {
+  color: var(--b-accent);
+  border-color: var(--b-accent);
+}
+.bgm-d .bgm-rate button.is-active {
+  background: var(--b-accent);
+  border-color: var(--b-accent);
+  color: var(--b-on-accent);
+}
+.bgm-d .bgm-rate .bgm-rate__clear {
+  width: auto;
+  padding: 0 9px;
+  color: var(--b-text3);
+}
+
+/* 短评 */
+.bgm-d .bgm-comment {
+  flex: 1 1 auto;
+  width: 100%;
+  padding: 9px 11px;
+  border: 1px solid var(--b-border);
+  border-radius: 10px;
+  background: var(--b-bg);
+  color: var(--b-text);
+  font-size: 13px;
+  line-height: 1.6;
+  font-family: inherit;
+  resize: vertical;
+}
+.bgm-d .bgm-comment:focus {
+  outline: none;
+  border-color: var(--b-accent);
+  box-shadow: 0 0 0 3px var(--b-accent-soft);
+}
+
+/* 底部按钮 */
+.bgm-d .bgm-d__foot {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding-top: 14px;
+  margin-top: 6px;
+  border-top: 1px solid var(--b-border);
+}
+.bgm-d .bgm-btn {
+  appearance: none;
+  padding: 7px 16px;
+  border: 1px solid var(--b-border);
+  border-radius: 10px;
+  background: var(--b-bg);
+  color: var(--b-text2);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background .18s, color .18s, border-color .18s, opacity .18s;
+}
+.bgm-d .bgm-btn:hover {
+  color: var(--b-accent);
+  border-color: var(--b-accent);
+}
+.bgm-d .bgm-btn--primary {
+  background: var(--b-accent);
+  border-color: var(--b-accent);
+  color: var(--b-on-accent);
+}
+.bgm-d .bgm-btn--primary:hover {
+  color: var(--b-on-accent);
+  opacity: .88;
+}
+.bgm-d .bgm-btn--ghost {
+  border-color: transparent;
+  background: transparent;
+  color: var(--b-text3);
+}
+.bgm-d .bgm-btn[disabled] {
+  opacity: .5;
+  cursor: not-allowed;
+}
+.bgm-d .bgm-d__tip {
+  flex: 1 1 200px;
+  font-size: 12px;
+  color: var(--b-text3);
+  text-align: right;
+}
+
+/* ---------- 通用区块 ---------- */
+.bgm-d .bgm-d__sec {
+  margin: 26px 0 0;
+}
+.bgm-d .bgm-d__sec h2 {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin: 0 0 12px;
+  padding-left: 10px;
+  border-left: 4px solid var(--b-accent);
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.3;
+  color: var(--b-text);
+}
+.bgm-d .bgm-d__sec h2 em {
+  font-style: normal;
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--b-text3);
+  font-variant-numeric: tabular-nums;
+}
+
+.bgm-d .bgm-d__summary {
+  margin: 0;
+  color: var(--b-text2);
+  font-size: 14px;
+  line-height: 1.85;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.bgm-d .bgm-d__empty {
+  margin: 0;
+  padding: 18px;
+  border-radius: 12px;
+  background: var(--b-soft);
+  color: var(--b-text3);
+  font-size: 13px;
+  text-align: center;
+}
+
+/* ---------- 分集表 ---------- */
+.bgm-d .bgm-eps {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 6px;
+}
+
+.bgm-d .bgm-ep {
+  display: grid;
+  grid-template-columns: 18px 26px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 9px;
+  padding: 8px 11px;
+  border: 1px solid var(--b-border);
+  border-radius: 10px;
+  background: var(--b-bg);
+  cursor: pointer;
+  transition: background .16s, border-color .16s;
+}
+.bgm-d .bgm-ep:hover {
+  border-color: var(--b-accent);
+  background: var(--b-accent-soft);
+}
+.bgm-d .bgm-ep input {
+  appearance: none;
+  width: 15px;
+  height: 15px;
+  margin: 0;
+  border: 1.5px solid var(--b-border);
+  border-radius: 4px;
+  background: var(--b-bg);
+  cursor: pointer;
+  position: relative;
+  transition: background .16s, border-color .16s;
+}
+.bgm-d .bgm-ep input:checked {
+  background: var(--b-accent);
+  border-color: var(--b-accent);
+}
+.bgm-d .bgm-ep input:checked::after {
+  content: "";
+  position: absolute;
+  left: 4px;
+  top: 1px;
+  width: 3px;
+  height: 7px;
+  border: solid var(--b-on-accent);
+  border-width: 0 1.8px 1.8px 0;
+  transform: rotate(42deg);
+}
+.bgm-d .bgm-ep__no {
+  font-size: 12px;
+  color: var(--b-text3);
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+}
+.bgm-d .bgm-ep__name {
+  font-size: 13px;
+  color: var(--b-text2);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.bgm-d .bgm-ep.is-watched .bgm-ep__name {
+  color: var(--b-text);
+}
+.bgm-d .bgm-ep__date {
+  font-size: 11px;
+  color: var(--b-text3);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------- 设置弹层 ---------- */
+.bgm-d .bgm-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  background: rgba(12, 14, 26, .55);
+  backdrop-filter: blur(3px);
+}
+.bgm-d .bgm-modal[hidden] {
+  display: none;
+}
+.bgm-d .bgm-modal__box {
+  width: min(520px, 100%);
+  max-height: 86vh;
+  overflow: auto;
+  padding: 22px 24px;
+  border-radius: 16px;
+  background: var(--b-bg);
+  box-shadow: var(--b-shadow-hover);
+}
+.bgm-d .bgm-modal__box h3 {
+  margin: 0 0 6px;
+  font-size: 16px;
+  color: var(--b-text);
+}
+.bgm-d .bgm-modal__box p {
+  margin: 0 0 14px;
+  font-size: 13px;
+  color: var(--b-text2);
+  line-height: 1.7;
+}
+.bgm-d .bgm-modal__box label {
+  display: block;
+  margin-bottom: 12px;
+  font-size: 12px;
+  color: var(--b-text3);
+}
+.bgm-d .bgm-modal__box input {
+  display: block;
+  width: 100%;
+  margin-top: 5px;
+  padding: 8px 11px;
+  border: 1px solid var(--b-border);
+  border-radius: 9px;
+  background: var(--b-soft);
+  color: var(--b-text);
+  font-size: 13px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+.bgm-d .bgm-modal__box input:focus {
+  outline: none;
+  border-color: var(--b-accent);
+}
+.bgm-d .bgm-modal__acts {
+  display: flex;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+/* ---------- 移动端 ---------- */
+@media (max-width: 720px) {
+  .bgm-d .bgm-d__hero {
+    grid-template-columns: 118px minmax(0, 1fr);
+    gap: 14px;
+  }
+  .bgm-d .bgm-d__title {
+    font-size: 18px;
+  }
+  .bgm-d .bgm-d__mine {
+    padding: 15px 14px 13px;
+  }
+  .bgm-d .bgm-d__row {
+    flex-direction: column;
+    gap: 7px;
+  }
+  .bgm-d .bgm-d__label {
+    flex: none;
+    padding-top: 0;
+  }
+  .bgm-d .bgm-d__tip {
+    text-align: left;
+  }
+  .bgm-d .bgm-eps {
+    grid-template-columns: 1fr;
+  }
+}

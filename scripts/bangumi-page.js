@@ -187,15 +187,15 @@ function coverHTML(item, name, ctx) {
 
 function cardHTML(item, ctx) {
   const name = item.name_cn || item.name || '未知条目';
-  const href = SITE + '/subject/' + item.id;
+  // 卡片进站内详情页（可改状态/进度），详情页里再给出 Bangumi 原站链接
+  const href = '/bangumis/' + item.id + '/';
   const cover = coverHTML(item, name, ctx);
   const score = item.rating && item.rating.score ? item.rating.score : '';
   const type = item.type || '';
   const eps = item.eps ? '共 ' + item.eps + ' 话' : '话数未定';
   const info = ctx.info[item.id] || {};
 
-  return '<a class="bgm-cd' + (cover ? '' : ' is-noimg') + '" href="' + esc(href) +
-    '" target="_blank" rel="noopener">' +
+  return '<a class="bgm-cd' + (cover ? '' : ' is-noimg') + '" href="' + esc(href) + '">' +
     '<span class="bgm-cd__cover">' + cover +
     (score ? '<i class="bgm-cd__score">' + esc(score) + '</i>' : '') +
     '</span>' +
@@ -311,7 +311,7 @@ hexo.extend.generator.register('bangumis', function (locals) {
     '</div>',
     panels,
     '<div class="bgm-page__foot">共 ' + total + ' 部 · 想看 ' + counts[0] +
-    ' / 在看 ' + counts[1] + ' / 已看 ' + counts[2] + '</div>',
+    ' / 在看 ' + counts[1] + ' / 已看 ' + counts[2] + ' · 点开任意一部可改状态与进度</div>',
     '</div>',
     '<script src="/js/bangumi-list.js" defer></script>'
   ].filter(Boolean).join('\n');
@@ -319,7 +319,7 @@ hexo.extend.generator.register('bangumis', function (locals) {
   return {
     path: cfg.path || 'bangumis/index.html',
     data: Object.assign(
-      { title: cfg.title || '追番列表', content: contents },
+      { title: cfg.title || '追番列表', type: 'page', content: contents },
       cfg.extra_options || {}
     ),
     layout: ['page', 'post']
