@@ -281,8 +281,10 @@ html[data-theme="dark"] .bgm-page {
 /* ---------- 列表布局：封面左、文字右，信息更全 ---------- */
 .bgm-page .bgm-collection[data-layout="list"] .bgm-cd {
   flex-direction: row;
-  /* 封面跟随卡片高度撑满，不再因为文字比图高而上下留空 */
-  align-items: stretch;
+  /* 封面自己决定卡片高度（固定 3:4），文字只在剩余空间里垂直居中。
+     不能再用 align-items: stretch —— 那会让文字越多封面被拉得越高，
+     3:4 的宣传图被拉成细长条，看起来就是变形。 */
+  align-items: center;
   gap: 14px;
   padding: 10px 14px 10px 10px;
 }
@@ -294,9 +296,10 @@ html[data-theme="dark"] .bgm-page {
   flex: 0 0 104px;
   width: 104px;
   height: auto;
-  /* 3:4 的基准高度，保证文字很少时封面也不会被压扁 */
-  min-height: 139px;
-  aspect-ratio: auto;
+  /* 宽度固定 + 3:4 比例：高度永远等于宽度的 4/3，不会随文字多少变化 */
+  aspect-ratio: 3 / 4;
+  min-height: 0;
+  align-self: center;
   border-radius: 9px;
 }
 /* 列表视图的评分放在标题行右侧，封面上的胶囊隐藏 */
@@ -485,14 +488,25 @@ html[data-theme="dark"] .bgm-page {
   }
   /* 列表视图在窄屏收敛一些，保证每一行都塞得下 */
   .bgm-page .bgm-collection[data-layout="list"] .bgm-cd {
-    align-items: stretch;
+    align-items: center;
     gap: 11px;
     padding: 8px 10px 8px 8px;
   }
   .bgm-page .bgm-collection[data-layout="list"] .bgm-cd__cover {
     flex: 0 0 68px;
     width: 68px;
-    min-height: 91px;
+    min-height: 0;
+  }
+  /* 窄屏每行只占一行，超出的部分右侧渐隐裁掉：
+     这样文字高度被锁死在封面以内，封面才能稳定保持 3:4 不被拉长。 */
+  .bgm-page .bgm-collection[data-layout="list"] .bgm-row {
+    flex-wrap: nowrap;
+    overflow: hidden;
+    -webkit-mask-image: linear-gradient(to right, #000 calc(100% - 16px), transparent);
+    mask-image: linear-gradient(to right, #000 calc(100% - 16px), transparent);
+  }
+  .bgm-page .bgm-collection[data-layout="list"] .bgm-row .bgm-kv {
+    flex: 0 0 auto;
   }
   .bgm-page .bgm-collection[data-layout="list"] .bgm-cd__body {
     padding: 0;
@@ -509,9 +523,9 @@ html[data-theme="dark"] .bgm-page {
     font-size: 11.5px;
     margin-top: 5px;
   }
-  /* 窄屏简介只留一行，避免卡片被文字拉得太高 */
+  /* 简介在窄屏会把卡片顶得高过封面，这里直接不显示（详情页有全文） */
   .bgm-page .bgm-collection[data-layout="list"] .bgm-sum {
-    -webkit-line-clamp: 1;
+    display: none;
   }
 }
 
