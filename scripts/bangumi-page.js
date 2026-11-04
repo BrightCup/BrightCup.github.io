@@ -109,6 +109,12 @@ function kvHTML(label, value) {
   return '<span class="bgm-kv"><i>' + esc(label) + '</i>' + esc(value) + '</span>';
 }
 
+/** 片段：窄屏会被整块隐藏，宽屏用 · 与上一段连接 */
+function kvExtra(value) {
+  if (!value) return '';
+  return '<span class="bgm-kv bgm-kv--extra">' + esc(value) + '</span>';
+}
+
 // ---------- 列表视图专属的富信息（网格视图下由 CSS 隐藏） ----------
 
 function richHTML(item, info, today) {
@@ -116,22 +122,26 @@ function richHTML(item, info, today) {
 
   // 1) 放送：状态胶囊 + 类型 · 话数 · 开播日 · 星期 · 电视台 · 结束日
   //    类型和话数原本单独占 meta 一行，列表视图里并进来，省一行高度。
+  //    「开播日 / 星期 / 电视台 / 结束日」拆成独立片段（bgm-kv--extra），
+  //    窄屏整块隐藏即可，不会把日期切成「2025-07-0」这种残句。
   const start = parseDate(info['放送开始']) || parseDate(item.date);
   const airParts = [];
   if (item.type) airParts.push(item.type);
   if (item.eps) airParts.push('共 ' + item.eps + ' 话');
-  if (start != null) airParts.push(isoDate(start) + ' 起');
-  if (info['放送星期']) airParts.push('每' + info['放送星期'].replace(/^星期/, '周'));
-  if (info['播放电视台']) airParts.push(clip(info['播放电视台'], 16));
+  const airExtra = [];
+  if (start != null) airExtra.push(isoDate(start) + ' 起');
+  if (info['放送星期']) airExtra.push('每' + info['放送星期'].replace(/^星期/, '周'));
+  if (info['播放电视台']) airExtra.push(clip(info['播放电视台'], 16));
   const end = parseDate(info['播放结束']);
-  if (end != null) airParts.push('至 ' + isoDate(end));
+  if (end != null) airExtra.push('至 ' + isoDate(end));
 
   const st = statusOf(item, info, today);
   const chip = st
     ? '<b class="bgm-chip is-' + st.key + '">' + esc(st.text) + '</b>'
     : '';
-  if (chip || airParts.length) {
-    rows.push('<span class="bgm-row">' + chip + kvHTML('放送', airParts.join(' · ')) + '</span>');
+  if (chip || airParts.length || airExtra.length) {
+    rows.push('<span class="bgm-row bgm-row--air">' + chip +
+      kvHTML('放送', airParts.join(' · ')) + airExtra.map(kvExtra).join('') + '</span>');
   }
 
   // 2) 制作阵容：动画制作（缺失时退回製作委员会）· 导演 · 剧本 · 人设 · 音乐 · 原作
@@ -144,7 +154,7 @@ function richHTML(item, info, today) {
   if (info['人物设定']) staff.push(kvHTML('人设', clip(info['人物设定'], 24)));
   if (info['音乐']) staff.push(kvHTML('音乐', clip(info['音乐'], 20)));
   if (info['原作']) staff.push(kvHTML('原作', clip(info['原作'], 26)));
-  if (staff.length) rows.push('<span class="bgm-row">' + staff.join('') + '</span>');
+  if (staff.length) rows.push('<span class="bgm-row bgm-row--staff">' + staff.join('') + '</span>');
 
   // 评分已在标题右侧显示，评分排名 / 全站收藏热度对个人追番页意义不大，
   // 原先单独占一行会把文字撑到封面之外，这里不再输出。

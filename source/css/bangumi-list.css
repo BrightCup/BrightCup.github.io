@@ -293,8 +293,8 @@ html[data-theme="dark"] .bgm-page {
 }
 .bgm-page .bgm-collection[data-layout="list"] .bgm-cd__cover {
   position: relative;
-  flex: 0 0 104px;
-  width: 104px;
+  flex: 0 0 112px;
+  width: 112px;
   height: auto;
   /* 宽度固定 + 3:4 比例：高度永远等于宽度的 4/3，不会随文字多少变化 */
   aspect-ratio: 3 / 4;
@@ -339,6 +339,12 @@ html[data-theme="dark"] .bgm-page {
   margin-top: 6px;
 }
 
+/* 列表视图不显示简介：两行简介会把文字顶到 164px，超过 139px 的封面，
+   卡片就被拉长、封面显得小。简介详情页有全文，这里舍掉。 */
+.bgm-page .bgm-collection[data-layout="list"] .bgm-sum {
+  display: none;
+}
+
 /* ---------- 列表视图专属的富信息 ---------- */
 .bgm-page .bgm-rich {
   display: none;
@@ -374,6 +380,17 @@ html[data-theme="dark"] .bgm-page {
   font-style: normal;
   font-size: 11px;
   line-height: 1.5;
+}
+/* 放送行里可整块舍弃的片段（开播日/星期/电视台/结束日），用 · 与前面连接 */
+.bgm-page .bgm-kv--extra::before {
+  content: '·';
+  margin-right: 5px;
+  color: var(--b-text3);
+  opacity: 0.7;
+}
+/* 这些片段本身已带 ·，间距收窄一些，避免点两侧留白过大 */
+.bgm-page .bgm-collection[data-layout="list"] .bgm-row--air {
+  gap: 4px 9px;
 }
 
 /* 放送状态胶囊 */
@@ -492,9 +509,12 @@ html[data-theme="dark"] .bgm-page {
     gap: 11px;
     padding: 8px 10px 8px 8px;
   }
+  /* 窄屏放弃简介这类次要文字，把省下的宽度给封面：
+     68px 在手机上偏小，88px（117 高）能看清海报，也仍能让
+     「标题 + 放送 + 制作」三行落在封面高度内。 */
   .bgm-page .bgm-collection[data-layout="list"] .bgm-cd__cover {
-    flex: 0 0 68px;
-    width: 68px;
+    flex: 0 0 88px;
+    width: 88px;
     min-height: 0;
   }
   /* 窄屏每行只占一行，超出的部分右侧渐隐裁掉：
@@ -504,6 +524,23 @@ html[data-theme="dark"] .bgm-page {
     overflow: hidden;
     -webkit-mask-image: linear-gradient(to right, #000 calc(100% - 16px), transparent);
     mask-image: linear-gradient(to right, #000 calc(100% - 16px), transparent);
+  }
+  /* 窄屏只留骨架信息：放送行保留「状态 + 类型 + 话数」，
+     开播日 / 星期 / 电视台 / 结束日整块隐藏（详情页里都有），
+     制作行只留第一项，其余隐藏。整块舍弃比切在中间好看。 */
+  .bgm-page .bgm-collection[data-layout="list"] .bgm-kv--extra {
+    display: none;
+  }
+  .bgm-page .bgm-collection[data-layout="list"] .bgm-row--staff .bgm-kv:not(:first-child) {
+    display: none;
+  }
+  /* 保留下来的制作名可能很长，用省略号收尾而不是硬截断 */
+  .bgm-page .bgm-collection[data-layout="list"] .bgm-row--staff .bgm-kv {
+    display: inline-block;
+    max-width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
   }
   .bgm-page .bgm-collection[data-layout="list"] .bgm-row .bgm-kv {
     flex: 0 0 auto;
@@ -518,14 +555,6 @@ html[data-theme="dark"] .bgm-page {
     gap: 3px 10px;
     font-size: 11.5px;
     margin-top: 4px;
-  }
-  .bgm-page .bgm-sum {
-    font-size: 11.5px;
-    margin-top: 5px;
-  }
-  /* 简介在窄屏会把卡片顶得高过封面，这里直接不显示（详情页有全文） */
-  .bgm-page .bgm-collection[data-layout="list"] .bgm-sum {
-    display: none;
   }
 }
 
