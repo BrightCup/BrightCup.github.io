@@ -90,23 +90,62 @@ body.room-page { overflow: hidden; }
 }
 @keyframes sr-spin { to { transform: rotate(360deg); } }
 
-/* ---- 粘贴邀请链接 ---- */
-.sr-paste {
+/* ---- 服务关闭等待页：没地址 / 连不上 / 被混合内容拦掉 共用一个 UI ---- */
+.sr-waiting {
   position: absolute;
   inset: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 10px;
+  gap: 11px;
   padding: 24px;
   text-align: center;
+  color: #cfd2e0;
   background: radial-gradient(circle at 50% 30%, #1b1b24, #0b0b10 70%);
 }
-.sr-paste[hidden] { display: none; }
-.sr-paste__title { font-size: 17px; font-weight: 600; color: #cfd2e0; }
-.sr-paste__sub { font-size: 12.5px; color: #8b90a4; }
-.sr-paste__row { display: flex; gap: 8px; width: min(560px, 100%); margin-top: 4px; }
+.sr-waiting[hidden] { display: none; }
+.sr-waiting__mark {
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  border: 1px solid rgba(125, 144, 255, .35);
+  background: rgba(125, 144, 255, .08);
+  position: relative;
+  margin-bottom: 4px;
+}
+.sr-waiting__mark::before,
+.sr-waiting__mark::after {
+  content: "";
+  position: absolute;
+  top: 13px;
+  width: 5px;
+  height: 16px;
+  border-radius: 2px;
+  background: #7d90ff;
+  opacity: .85;
+}
+.sr-waiting__mark::before { left: 14px; }
+.sr-waiting__mark::after { right: 14px; }
+.sr-waiting__title { font-size: 17px; font-weight: 600; }
+.sr-waiting__sub { font-size: 12.5px; color: #8b90a4; max-width: 520px; line-height: 1.7; }
+.sr-waiting__row { display: flex; gap: 8px; margin-top: 4px; }
+.sr-waiting__hint { font-size: 12px; color: #6f7488; margin-top: 6px; max-width: 520px; line-height: 1.7; }
+.sr-waiting__manual {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: center;
+  width: min(560px, 100%);
+  margin-top: 10px;
+  padding: 14px;
+  border: 1px solid rgba(255, 255, 255, .1);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, .03);
+}
+.sr-waiting__manual[hidden] { display: none; }
+.sr-waiting__manual-sub { font-size: 12px; color: #8b90a4; }
+.sr-paste__row { display: flex; gap: 8px; width: 100%; }
 .sr-paste__row input {
   flex: 1 1 auto;
   min-width: 0;
@@ -120,32 +159,6 @@ body.room-page { overflow: hidden; }
 }
 .sr-paste__row input:focus { border-color: #7d90ff; }
 .sr-paste__err { font-size: 12px; color: #ff6b6b; min-height: 16px; }
-
-/* ---- 兜底页：服务没开 / 地址不对 / 被混合内容拦掉 ---- */
-.sr-fallback {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  padding: 24px;
-  text-align: center;
-  color: #cfd2e0;
-  background: radial-gradient(circle at 50% 30%, #1b1b24, #0b0b10 70%);
-}
-.sr-fallback[hidden] { display: none; }
-.sr-fallback__title { font-size: 17px; font-weight: 600; }
-.sr-fallback__sub { font-size: 12.5px; color: #8b90a4; word-break: break-all; }
-.sr-fallback__row { display: flex; gap: 8px; margin-top: 4px; }
-.sr-fallback__hint { font-size: 12px; color: #6f7488; margin-top: 6px; }
-.sr-fallback code {
-  background: rgba(255, 255, 255, .08);
-  border-radius: 5px;
-  padding: 1px 6px;
-  color: #a9b0cf;
-}
 
 .sr-btn {
   background: rgba(255, 255, 255, .06);
@@ -168,5 +181,5 @@ body.room-page { overflow: hidden; }
 /* 移动端：导航折叠后仍有 60px，保持同样的减法 */
 @media (max-width: 900px) {
   .sr-frame-wrap { height: calc(100vh - 60px); }
-  .sr-fallback__title { font-size: 15px; }
+  .sr-waiting__title { font-size: 15px; }
 }

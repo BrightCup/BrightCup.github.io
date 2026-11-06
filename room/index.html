@@ -1,13 +1,13 @@
-<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>放映室 | BrightCup's blog</title><meta name="author" content="BrightCup"><meta name="copyright" content="BrightCup"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="正在连接放映室…            粘贴邀请链接     朋友发你的链接里已经带着房间号和服务器地址                   打开                      房间服务没有响应                 重试       换个地址          先在自己电脑上运行 node src&#x2F;index.js，再回到这里点重试">
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>放映室 | BrightCup's blog</title><meta name="author" content="BrightCup"><meta name="copyright" content="BrightCup"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="正在连接放映室…                 服务关闭，等待管理员开启     管理员启动放映室后，这里会直接显示房间列表，选一个就能加入。            重试       手动指定地址                 如果你手里有管理员发的入口链接，可以粘在这里：                         打开">
 <meta property="og:type" content="website">
 <meta property="og:title" content="放映室">
 <meta property="og:url" content="https://brightcup.github.io/room/index.html">
 <meta property="og:site_name" content="BrightCup&#39;s blog">
-<meta property="og:description" content="正在连接放映室…            粘贴邀请链接     朋友发你的链接里已经带着房间号和服务器地址                   打开                      房间服务没有响应                 重试       换个地址          先在自己电脑上运行 node src&#x2F;index.js，再回到这里点重试">
+<meta property="og:description" content="正在连接放映室…                 服务关闭，等待管理员开启     管理员启动放映室后，这里会直接显示房间列表，选一个就能加入。            重试       手动指定地址                 如果你手里有管理员发的入口链接，可以粘在这里：                         打开">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://brightcup.github.io/img/nanami.png">
 <meta property="article:published_time" content="2026-11-06T19:30:00.000Z">
-<meta property="article:modified_time" content="2026-11-06T14:30:21.524Z">
+<meta property="article:modified_time" content="2026-11-06T16:53:51.302Z">
 <meta property="article:author" content="BrightCup">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://brightcup.github.io/img/nanami.png"><script type="application/ld+json"></script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://brightcup.github.io/room/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.7.2"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.3.1/css/all.min.css"><script>
@@ -199,24 +199,34 @@
     <div class="sr-loading__text">正在连接放映室…</div>
   </div>
 
-  <div class="sr-paste" id="sr-paste" hidden>
-    <div class="sr-paste__title">粘贴邀请链接</div>
-    <div class="sr-paste__sub">朋友发你的链接里已经带着房间号和服务器地址</div>
-    <div class="sr-paste__row">
-      <input id="sr-paste-input" placeholder="https://brightcup.github.io/room/?server=…&amp;invite=…">
-      <button class="sr-btn sr-btn--primary" id="sr-paste-go">打开</button>
+  <div class="sr-waiting" id="sr-paste" hidden>
+    <div class="sr-waiting__mark"></div>
+    <div class="sr-waiting__title">服务关闭，等待管理员开启</div>
+    <div class="sr-waiting__sub">管理员启动放映室后，这里会直接显示房间列表，选一个就能加入。</div>
+    <div class="sr-waiting__row">
+      <button class="sr-btn sr-btn--primary" id="sr-waiting-retry">重试</button>
+      <button class="sr-btn" id="sr-waiting-manual">手动指定地址</button>
     </div>
-    <div class="sr-paste__err" id="sr-paste-err"></div>
+    <div class="sr-waiting__manual" id="sr-waiting-manual-box" hidden>
+      <div class="sr-waiting__manual-sub">如果你手里有管理员发的入口链接，可以粘在这里：</div>
+      <div class="sr-paste__row">
+        <input id="sr-paste-input" placeholder="https://brightcup.github.io/room/?server=…">
+        <button class="sr-btn sr-btn--primary" id="sr-paste-go">打开</button>
+      </div>
+      <div class="sr-paste__err" id="sr-paste-err"></div>
+    </div>
+    <div class="sr-waiting__hint" id="sr-waiting-hint">进来过一次之后，浏览器会记住服务地址，下次直接点菜单就行。</div>
   </div>
 
-  <div class="sr-fallback" id="sr-fallback" hidden>
-    <div class="sr-fallback__title">房间服务没有响应</div>
-    <div class="sr-fallback__sub" id="sr-fallback-sub"></div>
-    <div class="sr-fallback__row">
+  <div class="sr-waiting" id="sr-fallback" hidden>
+    <div class="sr-waiting__mark"></div>
+    <div class="sr-waiting__title">服务关闭，等待管理员开启</div>
+    <div class="sr-waiting__sub" id="sr-fallback-sub"></div>
+    <div class="sr-waiting__row">
       <button class="sr-btn sr-btn--primary" id="sr-retry">重试</button>
       <button class="sr-btn" id="sr-change">换个地址</button>
     </div>
-    <div class="sr-fallback__hint">先在自己电脑上运行 <code>node src/index.js</code>，再回到这里点重试</div>
+    <div class="sr-waiting__hint">等服务开启后点「重试」即可，不需要自己填地址。</div>
   </div>
 </div>
 
