@@ -21,6 +21,7 @@ menu:
   首页: / || fas fa-home
   追番列表: /bangumis/ || fas fa-video
   追番更新: /schedule/ || fas fa-calendar-day
+  放映室: /room/ || fas fa-film
   # List||fas fa-list:
   #   Music: /music/ || fas fa-music
   #   Movie: /movies/ || fas fa-video
