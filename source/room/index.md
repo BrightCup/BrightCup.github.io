@@ -34,7 +34,7 @@ top_img: false
       </div>
       <div class="sr-paste__err" id="sr-paste-err"></div>
     </div>
-    <div class="sr-waiting__hint" id="sr-waiting-hint">进来过一次之后，浏览器会记住服务地址，下次直接点菜单就行。</div>
+    <div class="sr-waiting__hint" id="sr-waiting-hint">管理员开启放映室后这里会自动连上，不用重新输入网址；也可以点「重试」立刻再试。</div>
   </div>
 
   <div class="sr-waiting" id="sr-fallback" hidden>
@@ -45,7 +45,7 @@ top_img: false
       <button class="sr-btn sr-btn--primary" id="sr-retry">重试</button>
       <button class="sr-btn" id="sr-change">换个地址</button>
     </div>
-    <div class="sr-waiting__hint">等服务开启后点「重试」即可，不需要自己填地址。</div>
+    <div class="sr-waiting__hint">等服务开启后会自动重连，不需要自己填地址。如果是朋友发的旧链接过期了，点「转到最新入口」即可。</div>
   </div>
 </div>
 
