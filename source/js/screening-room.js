@@ -23,6 +23,8 @@
   var paste = document.getElementById('sr-paste');
   var pasteInput = document.getElementById('sr-paste-input');
   var pasteErr = document.getElementById('sr-paste-err');
+  var waitingHint = document.getElementById('sr-waiting-hint');
+  var manualBox = document.getElementById('sr-waiting-manual-box');
   var pendingInvite = '';
 
   // #rightside / #footer 是 #body-wrap 的兄弟节点，CSS 用 :has() 选；
@@ -50,16 +52,18 @@
     var saved = localStorage.getItem(KEY);
     if (saved) return saved;
 
-    // 本地跑 hexo server 时默认指本机；线上没地址就让人粘贴链接
+    // 本地跑 hexo server 时默认指本机；线上没地址就显示「等待管理员开启」
     if (/^(localhost|127\.0\.0\.1)$/.test(location.hostname)) return DEFAULT_SERVER;
     return '';
   }
 
-  function showPaste(msg) {
+  /** 服务没开 / 还没有地址：统一的「等待管理员开启」页，默认不要求用户填任何东西 */
+  function showWaiting(msg) {
     if (loading) loading.hidden = true;
     fallback.hidden = true;
     if (paste) paste.hidden = false;
-    if (msg && pasteErr) pasteErr.textContent = msg;
+    if (msg && waitingHint) waitingHint.textContent = msg;
+    if (pasteErr) pasteErr.textContent = '';
   }
 
   function submitPaste() {
@@ -115,17 +119,17 @@
 
     server = resolveServer().replace(/\/+$/, '');
 
-    // 没有任何地址来源（线上第一次打开）：别硬怼 127.0.0.1，让人粘贴链接
+    // 线上第一次打开、还没有任何地址来源：显示等待页，不再逼人粘贴链接
     if (!server) {
-      showPaste();
+      showWaiting();
       return;
     }
     if (!/^https?:\/\//i.test(server)) {
-      showPaste('地址格式不对：' + server + '（要以 http:// 或 https:// 开头）');
+      showWaiting('记下的服务地址格式不对，等服务开启后重试即可。');
       return;
     }
     if (mixedBlocked(server)) {
-      showFallback('博客是 HTTPS，浏览器不允许嵌套 http 地址。需要 https 隧道地址，或点「换个地址」填 https://…');
+      showFallback('博客是 HTTPS，浏览器不允许嵌套 http 地址；管理员开启 https 隧道后点「重试」即可。');
       return;
     }
 
@@ -141,7 +145,7 @@
       '&_=' + Date.now();
 
     readyTimer = setTimeout(function () {
-      showFallback('等了 5 秒没收到响应：' + server);
+      showFallback('还没有收到服务响应（' + server + '），管理员可能还没开启放映室。');
     }, READY_TIMEOUT);
   }
 
@@ -198,6 +202,17 @@
 
   var retryBtn = document.getElementById('sr-retry');
   if (retryBtn) retryBtn.addEventListener('click', load);
+
+  var waitingRetry = document.getElementById('sr-waiting-retry');
+  if (waitingRetry) waitingRetry.addEventListener('click', load);
+
+  var manualBtn = document.getElementById('sr-waiting-manual');
+  if (manualBtn && manualBox) {
+    manualBtn.addEventListener('click', function () {
+      manualBox.hidden = !manualBox.hidden;
+      if (!manualBox.hidden && pasteInput) pasteInput.focus();
+    });
+  }
 
   var pasteGo = document.getElementById('sr-paste-go');
   if (pasteGo) pasteGo.addEventListener('click', submitPaste);
