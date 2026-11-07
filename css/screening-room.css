@@ -183,3 +183,17 @@ body.room-page { overflow: hidden; }
   .sr-frame-wrap { height: calc(100vh - 60px); }
   .sr-waiting__title { font-size: 15px; }
 }
+
+/* 手机影院模式：主题导航栏完全让位，iframe 占满整屏。
+   Butterfly 的 #nav 是固定 60px 导航条，#page-header 是头图区；
+   放映页两者都是纯浪费，隐藏后视频区能多出一整条。 */
+@media (max-width: 760px) {
+  body:has(#body-wrap.type-room) #nav,
+  body.room-page #nav,
+  body:has(#body-wrap.type-room) #page-header,
+  body.room-page #page-header { display: none !important; }
+  body:has(#body-wrap.type-room) #body-wrap,
+  body.room-page #body-wrap { padding-top: 0 !important; }
+  .sr-frame-wrap { height: 100vh !important; height: 100dvh !important; }
+  .sr-waiting__sub { font-size: 12px; }
+}
