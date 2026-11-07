@@ -8,7 +8,7 @@ comments: false
 top_img: false
 ---
 
-<link rel="stylesheet" href="/css/screening-room.css">
+<link rel="stylesheet" href="/css/screening-room.css?v=3">
 
 <div class="sr-frame-wrap" id="sr-wrap">
   <iframe id="sr-frame" title="放映室" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen referrerpolicy="no-referrer"></iframe>
@@ -49,4 +49,4 @@ top_img: false
   </div>
 </div>
 
-<script src="/js/screening-room.js" defer></script>
+<script src="/js/screening-room.js?v=3" defer></script>
