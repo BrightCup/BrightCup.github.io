@@ -49,8 +49,9 @@ code_blocks:
 # Formal:
 #   icon: link || the description || color
 social:
-  # fab fa-github: https://github.com/xxxxx || Github || '#24292e'
-  # fas fa-envelope: mailto:xxxxxx@gmail.com || Email || '#4a7dbe'
+  # 不指定颜色：横幅上用主题默认的白色，侧栏作者卡片里用主题的文字色
+  fab fa-github: https://github.com/BrightCup || Github
+  # fas fa-envelope: mailto:xxxxxx@gmail.com || Email
 
 # --------------------------------------
 # Image Settings
@@ -292,10 +293,10 @@ aside:
       enable: true
       icon: fab fa-github
       text: Follow Me
-      link: https://github.com/xxxxxx
+      link: https://github.com/BrightCup
   card_announcement:
     enable: true
-    content: This is my Blog
+    content: 记录一点番剧与琐事
   card_recent_post:
     enable: true
     # If set 0 will show all
